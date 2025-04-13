@@ -95,20 +95,144 @@ Tym samym analizowany fragment każdej klatki został ograniczony do wymiaru $24
 \end{figure}
 
 \subsubsection{Analiza współczynnika zmienności (CV)}
-Analiza współczynnika zmienności pikseli, wybór obszarów z CV $\leq$ 20\%, które odpowiadają niebu.
 
-\subsubsection{Konwersja na model HSV i statystyki opisowe}
-Opis konwersji z RGB na HSV, przedstawienie statystyk opisowych zredukowanego zbioru, wizualizacje 2D i 3D.
+Kolejnym etapem redukcji liczby cech była analiza współczynnika zmienności (\textit{Coefficient of Variation}, CV) dla każdego piksela w analizowanej przestrzeni obrazu. Współczynnik CV został obliczony osobno dla każdej składowej koloru RGB na podstawie wszystkich wyodrębnionych klatek, według wzoru:
+
+\[
+    \text{CV} = \frac{\sigma}{\mu}
+\]
+
+gdzie $\sigma$ to odchylenie standardowe danego piksela w czasie, a $\mu$ to jego średnia wartość.
+
+Na podstawie wyników analizy CV zauważono, że obszary o niskiej zmienności (CV $\leq 20\%$) występowały głównie w górnej części obrazu i pokrywały się z miejscami, w których zazwyczaj znajduje się niebo. Piksele te charakteryzują się dużą stabilnością w czasie – niezależnie od warunków atmosferycznych lub pozycji pojazdu.
+
+W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których CV dla przynajmniej jednej składowej RGB nie przekraczało 20\%. Taka selekcja pozwoliła ograniczyć liczbę cech z 9792 do około $\sim 3500$ (wartość zależna od liczby wybranych pikseli). Dzięki temu uzyskano tzw. \textbf{krótszy wektor cech}, który okazał się szczególnie przydatny w dalszych eksperymentach z klastrowaniem.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{maska_cv.png}
+    \caption{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}
+    \label{fig:maska_cv}
+\end{figure}
+
+\subsubsection{Konwersja na model HSV i przegląd statystyk opisowych}
+
+Po zastosowaniu redukcji opartej na współczynniku zmienności, dla wybranych pikseli dokonano konwersji przestrzeni barw z modelu RGB na HSV (ang. \textit{Hue, Saturation, Value}). Model HSV uznawany jest za bardziej intuicyjny z punktu widzenia percepcji barw przez człowieka, ponieważ oddziela informację o barwie od jasności i nasycenia.
+
+Proces konwersji został przeprowadzony dla każdego piksela wewnątrz maski CV $\leq 20\%$, osobno dla kanałów H, S i V. Przykładowa konwersja pojedynczego piksela z RGB na HSV została wykonana według standardowego algorytmu dostępnego w bibliotece OpenCV\footnote{\url{https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html}}.
+
+Na potrzeby eksploracji rozkładów cech utworzono zestawienie statystyk opisowych (średnia, mediana, odchylenie standardowe) dla każdego z trzech kanałów HSV, a także przeprowadzono analizę rozkładów przy użyciu histogramów (zarówno w skali liniowej, jak i logarytmicznej).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.47\textwidth]{hist_hue.png}
+    \includegraphics[width=0.47\textwidth]{hist_hue_log.png}
+    \caption{Histogram wartości kanału \textbf{Hue} w skali liniowej (lewo) i logarytmicznej (prawo).}
+    \label{fig:hist_hue}
+\end{figure}
+
+Dodatkowo przygotowano wizualizacje rozkładów punktów w przestrzeniach 2D i 3D. Na wykresach tych widoczne są zagęszczenia odpowiadające charakterystycznym kolorom nieba – np. skupiska w obszarach błękitu oraz neutralnych szarości.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{scatter_hsv.png}
+    \includegraphics[width=0.48\textwidth]{scatter_hsv_3d.png}
+    \caption{Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV.}
+    \label{fig:hsv_scatter}
+\end{figure}
+
+Dzięki transformacji na HSV możliwe stało się bardziej intuicyjne porównanie odcieni oraz klasyfikacja scen pod kątem dominujących barw. Informacja o jasności (V) i nasyceniu (S) okazała się pomocna w odróżnianiu typowych scen nieba od tych z dominacją szarości lub zacienienia.
 
 \subsubsection{Propozycja dwóch ostatecznych wektorów cech}
-Opis dwóch wybranych wektorów cech, które najlepiej sprawdziły się w analizie.
+
+W toku eksploracji przygotowano kilka różnych reprezentacji cech, bazujących na przekształconych danych HSV oraz maskach wybranych pikseli. Celem było znalezienie takich wektorów cech, które:
+\begin{itemize}
+    \item zawierają istotną informację różnicującą sceny,
+    \item mają możliwie niską liczbę wymiarów,
+    \item pozwalają na uzyskanie dobrze separowalnych klastrów.
+\end{itemize}
+
+Spośród przetestowanych wariantów, dwa wektory cech okazały się najbardziej efektywne w dalszej analizie skupień:
+
+\begin{enumerate}
+    \item \textbf{Krótszy wektor HSV (CV-filtered)} – zawiera wartości HSV tylko dla pikseli spełniających warunek CV $\leq 20\%$, po wcześniejszym obcięciu dolnych 20 wierszy obrazu. Długość wektora cech po tej operacji wynosiła od około 3300 do 3800 (zależnie od liczby pikseli wybranych przez maskę).
+
+    \item \textbf{Dłuższy wektor HSV (pełny górny obszar)} – zawiera wszystkie piksele z górnych 34 rzędów obrazu ($96 \cdot 34 = 3264$ pikseli), każdy reprezentowany w przestrzeni HSV (czyli łącznie $3264 \cdot 3 = 9792$ elementów).
+\end{enumerate}
+
+Oba wektory zostały wykorzystane w dalszych eksperymentach z klastrowaniem. Pierwszy z nich – krótszy – dawał bardziej przejrzyste i spójne klastry, a także mniejsze zapotrzebowanie obliczeniowe. Drugi natomiast pozwalał uwzględnić szerszy kontekst kolorystyczny obrazu, kosztem większego szumu i trudniejszej interpretacji wyników.
+
+W kolejnych rozdziałach oba wektory zostaną wykorzystane do klastrowania metodą KMeans, natomiast krótszy wektor – jako bardziej reprezentatywny – został również zastosowany w algorytmach DBSCAN oraz metody Warda.
 
 \section{Klastrowanie KMeans}
-\subsection{Krótszy wektor cech}
-Wykres łokciowy, wizualizacje 3D klastrów, przykładowe obrazy z klastrów.
 
-\subsection{Dłuższy wektor cech}
-Brak wykresu łokciowego, wizualizacje klastrów, przykładowe obrazy z klastrów.
+\subsection{Klastrowanie względem krótszego wektora cech i wizualizacje wyników}
+
+Do pierwszego eksperymentu klastrowania zastosowano algorytm KMeans dla krótszego wektora cech, zawierającego tylko wartości HSV dla pikseli o współczynniku zmienności CV $\leq 20\%$. Dane te były najbardziej zwarte, jednorodne i dobrze odwzorowywały kolorystykę nieba widoczną w górnej części obrazu.
+
+Aby wyznaczyć optymalną liczbę klastrów $k$, przeprowadzono analizę wykresu łokciowego (ang. \textit{elbow plot}), który przedstawia sumę kwadratów błędów (inertia) w zależności od liczby klastrów. Punkt załamania wskazywał na wartość $k=4$ jako najlepszy kompromis między precyzją a prostotą modelu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{elbow_plot.png}
+    \caption{Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech.}
+    \label{fig:elbow}
+\end{figure}
+
+Po wybraniu $k=4$, algorytm został uruchomiony ponownie w celu przypisania każdej klatki do jednego z czterech klastrów. Do wizualizacji wyników zastosowano redukcję wymiarów (np. PCA lub t-SNE), dzięki czemu możliwe było przedstawienie podziału klatek w przestrzeni 3D.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{kmeans_3d_clusters.png}
+    \caption{Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów.}
+    \label{fig:kmeans_3d}
+\end{figure}
+
+Każdy z klastrów zawierał obrazy o charakterystycznych cechach kolorystycznych. W celu jakościowej oceny wyników zaprezentowano losowe próbki klatek z każdego klastra. Przykładowe obrazy zostały przedstawione poniżej:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{kmeans_sample_grid.png}
+    \caption{Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$).}
+    \label{fig:kmeans_samples}
+\end{figure}
+
+Wyniki sugerują, że KMeans skutecznie wydzielił klastry odpowiadające różnym typom scen:
+\begin{itemize}
+    \item niebieskie, bezchmurne niebo,
+    \item szare niebo lub warstwa chmur,
+    \item ciemne ujęcia (np. tunel, zmierzch, cień),
+    \item sceny z zabudowaniami lub przeszkodami w górnej części obrazu.
+\end{itemize}
+
+
+\subsection{Klastrowanie względem dłuższego wektora cech}
+
+W kolejnym eksperymencie zastosowano algorytm KMeans dla tzw. dłuższego wektora cech – zawierającego wartości HSV dla wszystkich pikseli w górnej części obrazu ($96 \times 34$ piksele, czyli $9792$ wartości). W przeciwieństwie do wcześniejszego wariantu nie stosowano tutaj maski CV, co pozwalało uwzględnić więcej informacji z otoczenia, ale również zwiększało ryzyko wprowadzenia szumu do modelu.
+
+Z powodu wysokiego wymiaru i większej złożoności danych nie wykonano ponownie analizy wykresu łokciowego – założono $k=4$ dla spójności porównawczej z poprzednim podejściem.
+
+Podobnie jak wcześniej, przeprowadzono redukcję wymiarowości do trzech składowych i dokonano wizualizacji przestrzennej klastrów. W tym przypadku granice między klastrami okazały się mniej wyraźne, a rozkład danych bardziej rozproszony.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{kmeans_long_vector_3d.png}
+    \caption{Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości.}
+    \label{fig:kmeans_long_3d}
+\end{figure}
+
+Również w tym podejściu zaprezentowano przykładowe klatki z każdego klastra. Choć klastry nadal wykazywały pewną spójność, ich interpretacja była trudniejsza. Część klatek zawierała mieszane typy scen – np. fragment nieba częściowo przysłonięty zabudową – co utrudniało jednoznaczne przypisanie do konkretnej klasy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{kmeans_long_sample_grid.png}
+    \caption{Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech.}
+    \label{fig:kmeans_long_samples}
+\end{figure}
+
+W porównaniu do wersji z krótszym wektorem, rezultaty uzyskane przy wykorzystaniu pełnej górnej części obrazu cechowały się niższą czytelnością. Zwiększona liczba cech mogła przyczynić się do nadmiernego dopasowania do szumu i mniejszej separowalności wizualnej poszczególnych klas.
+
+
 
 \subsection{Interpretacja wyników}
 Interpretacja czterech klastrów: niebieskie niebo, szare niebo, noc/tunel, przeszkody.

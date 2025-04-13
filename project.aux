@@ -20,20 +20,36 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza).}}{4}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:srednia_klatka}{{2}{4}{Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza)}{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Analiza współczynnika zmienności (CV)}{4}{subsubsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Konwersja na model HSV i statystyki opisowe}{4}{subsubsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.4}Propozycja dwóch ostatecznych wektorów cech}{4}{subsubsection.2.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Klastrowanie KMeans}{5}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Krótszy wektor cech}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dłuższy wektor cech}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Interpretacja wyników}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Klastrowanie DBSCAN}{5}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Wybór parametru eps}{5}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Wizualizacje dla różnych wartości MinPts}{5}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Porównanie z KMeans}{5}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Klastrowanie metodą Warda}{5}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dendrogram}{5}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Podziały na 3, 4 i 5 klastrów}{5}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Interpretacja i porównanie z KMeans}{5}{subsection.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:maska_cv}{{3}{5}{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Konwersja na model HSV i przegląd statystyk opisowych}{5}{subsubsection.2.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Histogram wartości kanału \textbf  {Hue} w skali liniowej (lewo) i logarytmicznej (prawo).}}{5}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:hist_hue}{{4}{5}{Histogram wartości kanału \textbf {Hue} w skali liniowej (lewo) i logarytmicznej (prawo)}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV.}}{6}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:hsv_scatter}{{5}{6}{Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.4}Propozycja dwóch ostatecznych wektorów cech}{6}{subsubsection.2.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Klastrowanie KMeans}{7}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Klastrowanie względem krótszego wektora cech i wizualizacje wyników}{7}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech.}}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:elbow}{{6}{7}{Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów.}}{8}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:kmeans_3d}{{7}{8}{Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$).}}{8}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:kmeans_samples}{{8}{8}{Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$)}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Klastrowanie względem dłuższego wektora cech}{9}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości.}}{9}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:kmeans_long_3d}{{9}{9}{Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech.}}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:kmeans_long_samples}{{10}{10}{Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Interpretacja wyników}{10}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Klastrowanie DBSCAN}{10}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Wybór parametru eps}{10}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Wizualizacje dla różnych wartości MinPts}{10}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Porównanie z KMeans}{10}{subsection.4.3}\protected@file@percent }
 \bibcite{epec2024}{1}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Wnioski}{6}{section.6}\protected@file@percent }
-\gdef \@abspage@last{6}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Klastrowanie metodą Warda}{11}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dendrogram}{11}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Podziały na 3, 4 i 5 klastrów}{11}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Interpretacja i porównanie z KMeans}{11}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Wnioski}{11}{section.6}\protected@file@percent }
+\gdef \@abspage@last{11}
