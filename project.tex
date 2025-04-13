@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{Eksploracyjna analiza skupień klatek z nagrań wideo z kamer samochodowych}
+\author{Dominik Banach, Marek Kacprzak}
+\date{Kwiecień 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+\subsection{Cel i zakres analizy}
+W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny jakości powietrza. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych fragmentów obrazu bez potrzeby nadzoru.
+
+Celem niniejszego projektu jest przeprowadzenie eksploracyjnej analizy skupień na wybranym zbiorze klatek wyodrębnionych z nagrań wideo wykonanych w trakcie jazdy samochodem po Warszawie i jej obrzeżach. Skupiamy się na analizie kolorów występujących w górnej części obrazu, które często odpowiadają niebu lub wysokim zabudowaniom miejskim.
+
+Do analizy zastosowano kilka popularnych metod klastrowania, w tym KMeans, DBSCAN oraz metodę Warda. Wcześniej konieczne było przekształcenie danych z obrazów do postaci wektorów cech, ich selekcja oraz redukcja wymiarowości. Szczególną uwagę poświęcono modelowi barw HSV, który lepiej oddaje percepcyjne różnice kolorów niż klasyczny model RGB.
+
+Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba widocznego na nagraniach możliwe jest wykrycie istotnych klas obrazów i czy dominacja poszczególnych kolorów (np. szarości) może być interpretowana w kontekście zanieczyszczenia powietrza.
+
+\subsection{Słownik pojęć}
+
+\begin{itemize}
+    \item \textbf{RGB (Red, Green, Blue)} – przestrzeń barw oparta na składowych światła czerwonego, zielonego i niebieskiego. Popularna w reprezentacji obrazów w kamerach i monitorach.
+
+    \item \textbf{HSV (Hue, Saturation, Value)} – alternatywna przestrzeń barw lepiej odpowiadająca postrzeganiu kolorów przez człowieka. Składowe opisują barwę (Hue), nasycenie (Saturation) i jasność (Value).
+
+    \item \textbf{KMeans} – popularna metoda klastrowania polegająca na podziale danych na $k$ klastrów w taki sposób, aby minimalizować odległość punktów od środków klastrów.
+
+    \item \textbf{DBSCAN (Density-Based Spatial Clustering of Applications with Noise)} – algorytm klastrowania wykrywający gęsto zaludnione obszary w danych; nie wymaga podania liczby klastrów i radzi sobie z hałasem.
+
+    \item \textbf{Metoda Warda} – hierarchiczna metoda klastrowania minimalizująca sumę kwadratów różnic wewnątrz klastrów. Pozwala na tworzenie dendrogramów i analizę hierarchicznej struktury danych.
+
+    \item \textbf{Kolor nieba} – istotna cecha wizualna wykorzystywana w analizie warunków atmosferycznych i pośrednio jakości powietrza. Niebieskie niebo może wskazywać na przejrzystą atmosferę, szare – na zachmurzenie lub zanieczyszczenie.
+
+    \item \textbf{Zanieczyszczenia powietrza} – czynniki wpływające na widoczność nieba w kamerach. W analizie skupień mogą prowadzić do występowania określonych klas związanych z obniżoną przejrzystością.
+\end{itemize}
+
+\section{Zbiór danych}
+\subsection{Ogólny opis zbioru}
+Informacje o liczbie godzin nagrań, lokalizacji (np. mapa Warszawy), źródle danych.
+
+\subsection{Ekstrakcja klatek}
+Opis procesu ekstrakcji klatek z nagrań, zmiana rozmiaru obrazów, długość wektora cech.
+
+\subsection{Dalsza redukcja wymiarowości}
+\subsubsection{Analiza średniej klatki}
+Opis analizy średniej klatki, identyfikacja maski i refleksów, decyzja o obcięciu dolnych 20 wierszy.
+
+\subsubsection{Analiza współczynnika zmienności (CV)}
+Analiza współczynnika zmienności pikseli, wybór obszarów z CV $\leq$ 20\%, które odpowiadają niebu.
+
+\subsubsection{Konwersja na model HSV i statystyki opisowe}
+Opis konwersji z RGB na HSV, przedstawienie statystyk opisowych zredukowanego zbioru, wizualizacje 2D i 3D.
+
+\subsubsection{Propozycja dwóch ostatecznych wektorów cech}
+Opis dwóch wybranych wektorów cech, które najlepiej sprawdziły się w analizie.
+
+\section{Klastrowanie KMeans}
+\subsection{Krótszy wektor cech}
+Wykres łokciowy, wizualizacje 3D klastrów, przykładowe obrazy z klastrów.
+
+\subsection{Dłuższy wektor cech}
+Brak wykresu łokciowego, wizualizacje klastrów, przykładowe obrazy z klastrów.
+
+\subsection{Interpretacja wyników}
+Interpretacja czterech klastrów: niebieskie niebo, szare niebo, noc/tunel, przeszkody.
+
+\section{Klastrowanie DBSCAN}
+\subsection{Wybór parametru eps}
+Wykres 5NN do wyboru parametru eps.
+
+\subsection{Wizualizacje dla różnych wartości MinPts}
+Wizualizacje klastrowania dla eps=0.008 i różnych wartości MinPts, analiza wyników.
+
+\subsection{Porównanie z KMeans}
+Porównanie podziału na 4 klastry DBSCAN i KMeans, trudności w interpretacji klastrów DBSCAN.
+
+\section{Klastrowanie metodą Warda}
+\subsection{Dendrogram}
+Prezentacja dendrogramu uzyskanego metodą Warda.
+
+\subsection{Podziały na 3, 4 i 5 klastrów}
+Wizualizacje podziałów na różną liczbę klastrów, analiza podobieństw do wyników KMeans.
+
+\subsection{Interpretacja i porównanie z KMeans}
+Interpretacja klastrów uzyskanych metodą Warda, porównanie z wynikami KMeans.
+
+\section{Wnioski}
+Podsumowanie wyników analizy, dominacja szarego nieba, stosunek niebieskiego do szarego nieba, odniesienie do pracy z konferencji EPEC 2024 dotyczącej wpływu zanieczyszczeń na kolor nieba.
+
+\begin{thebibliography}{9}
+    \bibitem{epec2024}
+\end{thebibliography}
+
+\end{document}
