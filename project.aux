@@ -15,56 +15,43 @@
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:mapa}{{1}{3}{Orientacyjna trasa przejazdu samochodu z kamerą}{figure.caption.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Ekstrakcja klatek}{3}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Dalsza redukcja wymiarowości}{4}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Analiza średniej klatki}{4}{subsubsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Analiza średniej klatki}{4}{subsubsection.2.2.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza).}}{4}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:srednia_klatka}{{2}{4}{Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza)}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Analiza współczynnika zmienności (CV)}{4}{subsubsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Analiza współczynnika zmienności (CV)}{4}{subsubsection.2.2.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:maska_cv}{{3}{5}{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu}{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Konwersja na model HSV i przegląd statystyk opisowych}{5}{subsubsection.2.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Histogram wartości kanału \textbf  {Hue} w skali liniowej (lewo) i logarytmicznej (prawo).}}{5}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:hist_hue}{{4}{5}{Histogram wartości kanału \textbf {Hue} w skali liniowej (lewo) i logarytmicznej (prawo)}{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV.}}{6}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:hsv_scatter}{{5}{6}{Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV}{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.4}Propozycja dwóch ostatecznych wektorów cech}{6}{subsubsection.2.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Klastrowanie KMeans}{7}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Klastrowanie względem krótszego wektora cech i wizualizacje wyników}{7}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech.}}{7}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:elbow}{{6}{7}{Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech}{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów.}}{8}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:kmeans_3d}{{7}{8}{Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$).}}{8}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:kmeans_samples}{{8}{8}{Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$)}{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Klastrowanie względem dłuższego wektora cech}{9}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości.}}{9}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:kmeans_long_3d}{{9}{9}{Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości}{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech.}}{10}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:kmeans_long_samples}{{10}{10}{Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech}{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Interpretacja wyników}{10}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Klastrowanie DBSCAN}{11}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Wybór parametru \textit  {eps} na podstawie wykresu 5NN}{11}{subsection.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx $ 0{,}008.}}{11}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:5nn}{{11}{11}{Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx $ 0{,}008}{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Wizualizacje klastrowania dla \textit  {eps} = 0.008 i różnych wartości \textit  {MinPts}}{12}{subsection.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów.}}{12}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:dbscan_param}{{12}{12}{Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Porównanie podziału na 4 klastry DBSCAN i 4Means}{12}{subsection.4.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans.}}{13}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:compare_dbscan_kmeans}{{13}{13}{Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans}{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Klastrowanie metodą Warda}{13}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dendrogram}{13}{subsection.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów.}}{14}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:dendrogram}{{14}{14}{Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Wizualizacje podziałów na 3, 4 i 5 klastrów}{14}{subsection.5.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań.}}{15}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:ward_3}{{15}{15}{Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań}{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami.}}{16}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:ward_4}{{16}{16}{Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami}{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność.}}{17}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:ward_5}{{17}{17}{Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność}{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Interpretacja i porównanie z 4Means}{17}{subsection.5.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen.}}{18}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:ward_vs_kmeans}{{18}{18}{Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen}{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Podsumowanie}{18}{section.6}\protected@file@percent }
-\gdef \@abspage@last{18}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Definicja ostatecznych wektorów cech}{5}{subsubsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Wizualizacja przestrzeni cech}{6}{subsubsection.2.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Rozkład danych w przestrzeni trójwymiarowej \(\vec  {f}_2 = [\widetilde  {H}, \widetilde  {S}, \widetilde  {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde  {V}\).}}{7}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:scatter_f2}{{4}{7}{Rozkład danych w przestrzeni trójwymiarowej \(\vec {f}_2 = [\widetilde {H}, \widetilde {S}, \widetilde {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde {V}\)}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Klastrowanie KMeans z wykorzystaniem wektora cech}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec  {f}_2\).}}{8}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:elbow_f2}{{5}{8}{Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec {f}_2\)}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych.}}{9}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:kmeans_f2_clusters}{{6}{9}{Wyniki KMeans dla wektora \(\vec {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Wybrane obrazy z czterech klastrów (KMeans, \(\vec  {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi.}}{10}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:kmeans_f2_samples}{{7}{10}{Wybrane obrazy z czterech klastrów (KMeans, \(\vec {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Klastrowanie DBSCAN z wykorzystaniem wektora 3-elementowego}{10}{subsection.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Wykres 5-NN dla danych z wektorem \(\vec  {f}_2\) – wybór parametru \texttt  {eps}.}}{10}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:dbscan_eps2}{{8}{10}{Wykres 5-NN dla danych z wektorem \(\vec {f}_2\) – wybór parametru \texttt {eps}}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Wyniki klastrowania DBSCAN dla \(\vec  {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu).}}{11}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:dbscan_f2_results}{{9}{11}{Wyniki klastrowania DBSCAN dla \(\vec {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu)}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Więcej wynikó klastrowania DBSCAN dla \(\vec  {f}_2\) –.}}{12}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:dbscan_f2_results_more}{{10}{12}{Więcej wynikó klastrowania DBSCAN dla \(\vec {f}_2\) –}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej.}}{13}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:dbscan_samples}{{11}{13}{Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Klastrowanie metodą Warda z wykorzystaniem wektora 3-elementowego}{13}{subsection.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec  {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów.}}{14}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:ward_f2_dendro}{{12}{14}{Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Wizualizacja klastrowania Warda na 3 klastry – brak wyraźnego podziału między różnymi typami nieba.}}{14}{figure.caption.13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Wizualizacja klastrów przy 5 klasach – struktura złożona, ale mniej intuicyjna.}}{15}{figure.caption.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec  {f}_2\).}}{16}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:ward_f2_4clusters}{{15}{16}{Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec {f}_2\)}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom.}}{17}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:ward_f2_samples}{{16}{17}{Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Klastrowanie KMeans z wykorzystaniem wektora 7-elementowego}{17}{subsection.2.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów.}}{18}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:kmeans_f1_samples}{{17}{18}{Wyniki KMeans dla wektora \(\vec {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Podsumowanie i wnioski}{18}{section.3}\protected@file@percent }
+\gdef \@abspage@last{19}

@@ -20,18 +20,18 @@
 \maketitle
 
 \begin{abstract}
-    Celem niniejszego projektu jest eksploracyjna analiza klatek wyodrębnionych z nagrań wideo pochodzących z kamer samochodowych. Skupiono się na górnej części obrazów, zawierającej najczęściej niebo, które może pośrednio odzwierciedlać moment dnia nagrania. Obrazy zostały przekształcone z przestrzeni RGB do HSV i poddane selekcji oraz redukcji wymiarowości w oparciu o analizę zmienności pikseli. Następnie zastosowano trzy metody klastrowania: KMeans, DBSCAN i hierarchiczną metodę Warda. Najlepsze rezultaty pod względem interpretowalności uzyskano przy podziale na cztery klastry, które odpowiadają różnym warunkom widoczności – takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody. Dominacja klas odpowiadających szarościom może sugerować występowanie pory wieczorowej w analizowanym materiale wideo.
+    Celem niniejszego projektu jest eksploracyjna analiza klatek wyodrębnionych z nagrań wideo pochodzących z kamer samochodowych. Skupiono się na górnej części obrazów, zawierającej najczęściej niebo, które może pośrednio odzwierciedlać moment dnia nagrania. Obrazy zostały przekształcone z przestrzeni RGB do HSV i poddane selekcji oraz redukcji wymiarowości w oparciu o analizę zmienności pikseli. Następnie zastosowano trzy metody klastrowania: KMeans, DBSCAN i hierarchiczną metodę Warda. Najlepsze rezultaty pod względem interpretowalności uzyskano przy podziale na cztery klastry, które odpowiadają różnym kolorom interesujących nas pixeli – takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody.
 \end{abstract}
 
 \section{Wstęp}
 \subsection{Cel i zakres analizy}
-W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny pory dnia. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych fragmentów obrazu bez potrzeby nadzoru.
+W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny stopnia zakorkowania dróg. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych fragmentów obrazu bez potrzeby nadzoru.
 
-Celem niniejszego projektu jest przeprowadzenie eksploracyjnej analizy skupień na wybranym zbiorze klatek wyodrębnionych z nagrań wideo wykonanych w trakcie jazdy samochodem po Warszawie i jej obrzeżach. Skupiamy się na analizie kolorów występujących w górnej części obrazu, które często odpowiadają niebu lub wysokim zabudowaniom miejskim.
+Celem projektu jest przeprowadzenie eksploracyjnej analizy skupień na wybranym zbiorze klatek wyodrębnionych z nagrań wideo wykonanych w trakcie jazdy samochodem po Warszawie i jej obrzeżach. Skupiamy się na analizie kolorów występujących w górnej części obrazu, które często odpowiadają niebu lub wysokim zabudowaniom miejskim.
 
 Do analizy zastosowano kilka popularnych metod klastrowania, w tym KMeans, DBSCAN oraz metodę Warda. Wcześniej konieczne było przekształcenie danych z obrazów do postaci wektorów cech, ich selekcja oraz redukcja wymiarowości. Szczególną uwagę poświęcono modelowi barw HSV, który lepiej oddaje percepcyjne różnice kolorów niż klasyczny model RGB.
 
-Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba widocznego na nagraniach możliwe jest wykrycie istotnych klas obrazów i czy dominacja poszczególnych kolorów (np. szarości) może być interpretowana w kontekście gdzie znajdował się samochód wyposażony w kamerę.
+Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba widocznego na nagraniach możliwe jest wykrycie istotnych klas obrazów i czy dominacja poszczególnych kolorów (np. szarości czy czerni) może być interpretowana w kontekście gdzie znajdował się samochód wyposażony w kamerę.
 
 \subsection{Słownik pojęć}
 
@@ -65,19 +65,18 @@ Trasa przejazdu obejmowała m.in. centrum Warszawy, mosty, dzielnice z gęstą z
     \label{fig:mapa}
 \end{figure}
 
-W początkowej fazie analizy pozyskano łącznie około 60*60*140 klatek , które następnie poddano przetwarzaniu w celu dalszego modelowania i klastrowania kolorystycznego. Zastosowana metodologia koncentruje się nie na całym obrazie, lecz na jego górnej części, w której najczęściej znajduje się niebo lub elementy go przysłaniające – takie jak budynki, znaki drogowe lub elementy infrastruktury. To właśnie ta część obrazu została uznana za najbardziej reprezentatywną do klastrowania na podstawie kolorystyki sceny.
+W początkowej fazie analizy pozyskano łącznie około 6.2 miliona klatek , które następnie poddano przetwarzaniu w celu dalszego modelowania i klastrowania kolorystycznego. Zastosowana metodologia koncentruje się nie na całym obrazie, lecz na jego górnej części, w której najczęściej znajduje się niebo lub elementy go przysłaniające – takie jak budynki, znaki drogowe lub elementy infrastruktury. To właśnie ta część obrazu została uznana za najbardziej reprezentatywną do klastrowania na podstawie kolorystyki sceny.
 
 \subsection{Ekstrakcja klatek}
 
-Z nagrań wideo pozyskanych z kamery samochodowej wyodrębniono pojedyncze klatki. Proces ekstrakcji został przeprowadzony przy użyciu skryptu automatyzującego odczyt kolejnych ramek z plików wideo oraz zapis ich jako obrazów w formacie \texttt{.png}.
+Z nagrań wideo pozyskanych z kamery samochodowej wyodrębniono pojedyncze klatki, po 60 na sekundę nagrania. Proces ekstrakcji został przeprowadzony przy użyciu skryptu automatyzującego odczyt kolejnych ramek z plików wideo oraz zapis ich jako obrazów w formacie \texttt{.png}.
 
-Każda z klatek została przeskalowana z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
+Każda z klatek została przeskalowana (licząc średnią z każdych usuniętych klatek w jedną) z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
 
 Dla każdej przeskalowanej klatki obliczono wektor cech, w którym każdy piksel był reprezentowany trzema wartościami odpowiadającymi składowym koloru w przestrzeni RGB. Ostatecznie więc pojedynczy obraz o rozmiarze $240 \times 80$ zawierał $240 \times 80 = 19.200$ pikseli, a wektor cech miał długość $19.200 \times 3 = 57\ 600$ elementów.
 
 Tak otrzymane wektory stanowiły bazę do dalszej redukcji wymiarowości oraz transformacji kolorystycznych, umożliwiających ekstrakcję tylko tych fragmentów obrazu, które były istotne z punktu widzenia analizy kolorystyki nieba lub jego braku.
 
-\subsection{Dalsza redukcja wymiarowości}
 
 \subsubsection{Analiza średniej klatki}
 
@@ -106,7 +105,7 @@ gdzie $\sigma$ to odchylenie standardowe danego piksela w czasie, a $\mu$ to jeg
 
 Na podstawie wyników analizy CV zauważono, że obszary o niskiej zmienności (CV $\leq 20\%$) występowały głównie w górnej części obrazu i pokrywały się z miejscami, w których zazwyczaj znajduje się niebo. Piksele te charakteryzują się dużą stabilnością w czasie – niezależnie od warunków atmosferycznych lub pozycji pojazdu.
 
-W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których CV dla przynajmniej jednej składowej RGB nie przekraczało 20\%. Taka selekcja pozwoliła ograniczyć liczbę cech z 9792 do około $\sim 3500$ (wartość zależna od liczby wybranych pikseli). Dzięki temu uzyskano tzw. \textbf{krótszy wektor cech}, który okazał się szczególnie przydatny w dalszych eksperymentach z klastrowaniem.
+W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których CV dla przynajmniej jednej składowej RGB nie przekraczało 20\%. Taka selekcja pozwoliła ograniczyć liczbę cech do około $\sim 930$ (wartość zależna od liczby wybranych pikseli). Dzięki temu uzyskano tzw. \textbf{krótszy wektor cech}, który okazał się szczególnie przydatny w dalszych eksperymentach z klastrowaniem.
 
 \begin{figure}[H]
     \centering
@@ -115,312 +114,315 @@ W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których 
     \label{fig:maska_cv}
 \end{figure}
 
-\subsubsection{Konwersja na model HSV i przegląd statystyk opisowych}
+\subsubsection{Definicja ostatecznych wektorów cech}
 
-Po zastosowaniu redukcji opartej na współczynniku zmienności, dla wybranych pikseli dokonano konwersji przestrzeni barw z modelu RGB na HSV (ang. \textit{Hue, Saturation, Value}). Model HSV uznawany jest za bardziej intuicyjny z punktu widzenia percepcji barw przez człowieka, ponieważ oddziela informację o barwie od jasności i nasycenia.
+Po przeprowadzeniu analizy CV oraz konwersji kolorów do przestrzeni HSV, sformułowano dwie zwarte reprezentacje cech, które posłużyły do eksperymentów klastrowych. Oba wektory mają istotnie mniejszy wymiar niż surowy obraz, co umożliwia szybkie przetwarzanie i redukcję szumu.
 
-Proces konwersji został przeprowadzony dla każdego piksela wewnątrz maski CV $\leq 20\%$, osobno dla kanałów H, S i V. Przykładowa konwersja pojedynczego piksela z RGB na HSV została wykonana według standardowego algorytmu dostępnego w bibliotece OpenCV\footnote{\url{https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html}}.
+\textbf{Pierwszy wektor cech \(\vec{f}_1\)} o długości 7 zawiera podstawowe statystyki opisowe oraz wskaźniki kolorystyczne:
 
-Na potrzeby eksploracji rozkładów cech utworzono zestawienie statystyk opisowych (średnia, mediana, odchylenie standardowe) dla każdego z trzech kanałów HSV, a także przeprowadzono analizę rozkładów przy użyciu histogramów (zarówno w skali liniowej, jak i logarytmicznej).
+\[
+    \vec{f}_1 =
+    \left[
+        \overline{V},
+        \sigma_V,
+        \text{IQR}_{RGB},
+        \frac{G}{R},
+        \frac{G}{B},
+        \overline{S},
+        \overline{H}
+        \right]
+\]
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.47\textwidth]{hist_hue.png}
-    \includegraphics[width=0.47\textwidth]{hist_hue_log.png}
-    \caption{Histogram wartości kanału \textbf{Hue} w skali liniowej (lewo) i logarytmicznej (prawo).}
-    \label{fig:hist_hue}
-\end{figure}
-
-Dodatkowo przygotowano wizualizacje rozkładów punktów w przestrzeniach 2D i 3D. Na wykresach tych widoczne są zagęszczenia odpowiadające charakterystycznym kolorom nieba – np. skupiska w obszarach błękitu oraz neutralnych szarości.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.48\textwidth]{scatter_hsv.png}
-    \includegraphics[width=0.48\textwidth]{scatter_hsv_3d.png}
-    \caption{Lewo: rozrzut punktów w przestrzeni H-S. Prawo: wizualizacja 3D w przestrzeni HSV.}
-    \label{fig:hsv_scatter}
-\end{figure}
-
-Dzięki transformacji na HSV możliwe stało się bardziej intuicyjne porównanie odcieni oraz klasyfikacja scen pod kątem dominujących barw. Informacja o jasności (V) i nasyceniu (S) okazała się pomocna w odróżnianiu typowych scen nieba od tych z dominacją szarości lub zacienienia.
-
-\subsubsection{Propozycja dwóch ostatecznych wektorów cech}
-
-W toku eksploracji przygotowano kilka różnych reprezentacji cech, bazujących na przekształconych danych HSV oraz maskach wybranych pikseli. Celem było znalezienie takich wektorów cech, które:
+Gdzie:
 \begin{itemize}
-    \item zawierają istotną informację różnicującą sceny,
-    \item mają możliwie niską liczbę wymiarów,
-    \item pozwalają na uzyskanie dobrze separowalnych klastrów.
+    \item \(\overline{V}\) – średnia wartość jasności (Value),
+    \item \(\sigma_V\) – odchylenie standardowe jasności,
+    \item \(\text{IQR}_{RGB}\) – rozstęp międzykwartylowy wartości z kanałów R, G, B,
+    \item \(\frac{G}{R}\), \(\frac{G}{B}\) – stosunki wartości zielonego kanału do czerwonego i niebieskiego,
+    \item \(\overline{S}\), \(\overline{H}\) – średnie wartości nasycenia (Saturation) i barwy (Hue).
 \end{itemize}
 
-Spośród przetestowanych wariantów, dwa wektory cech okazały się najbardziej efektywne w dalszej analizie skupień:
+\textbf{Drugi wektor cech \(\vec{f}_2\)} to minimalna, trzywymiarowa reprezentacja:
 
-\begin{enumerate}
-    \item \textbf{Krótszy wektor HSV (CV-filtered)} – zawiera wartości HSV tylko dla pikseli spełniających warunek CV $\leq 20\%$, po wcześniejszym obcięciu dolnych 20 wierszy obrazu. Długość wektora cech po tej operacji wynosiła od około 3300 do 3800 (zależnie od liczby pikseli wybranych przez maskę).
+\[
+    \vec{f}_2 =
+    \left[
+        \widetilde{H},
+        \widetilde{S},
+        \widetilde{V}
+        \right]
+\]
 
-    \item \textbf{Dłuższy wektor HSV (pełny górny obszar)} – zawiera wszystkie piksele z górnych 34 rzędów obrazu ($96 \cdot 34 = 3264$ pikseli), każdy reprezentowany w przestrzeni HSV (czyli łącznie $3264 \cdot 3 = 9792$ elementów).
-\end{enumerate}
+Gdzie:
+\begin{itemize}
+    \item \(\widetilde{H}\) – mediana barwy (Hue),
+    \item \(\widetilde{S}\) – mediana nasycenia (Saturation),
+    \item \(\widetilde{V}\) – mediana jasności (Value).
+\end{itemize}
 
-Oba wektory zostały wykorzystane w dalszych eksperymentach z klastrowaniem. Pierwszy z nich – krótszy – dawał bardziej przejrzyste i spójne klastry, a także mniejsze zapotrzebowanie obliczeniowe. Drugi natomiast pozwalał uwzględnić szerszy kontekst kolorystyczny obrazu, kosztem większego szumu i trudniejszej interpretacji wyników.
+Oba wektory zostały następnie wykorzystane jako reprezentacja cech w eksperymentach z algorytmem KMeans. Wektor \(\vec{f}_2\), mimo że krótszy, zapewniał zaskakująco dobrą separowalność w niektórych przypadkach, jednak to \(\vec{f}_1\) dawał bardziej stabilne i interpretowalne klastry.
 
-W kolejnych rozdziałach oba wektory zostaną wykorzystane do klastrowania metodą KMeans, natomiast krótszy wektor – jako bardziej reprezentatywny – został również zastosowany w algorytmach DBSCAN oraz metody Warda.
+\subsubsection{Wizualizacja przestrzeni cech}
 
-\section{Klastrowanie KMeans}
+Aby lepiej zrozumieć rozkład danych w przestrzeni trójwymiarowej \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\), przygotowano serię wykresów przedstawiających strukturę danych z różnych perspektyw.
 
-\subsection{Klastrowanie względem krótszego wektora cech i wizualizacje wyników}
+\textbf{Górna część Rysunku~\ref{fig:scatter_f2}} przedstawia sześć ujęć 3D z różnych azymutów (kątów obrotu wokół osi pionowej), wszystkie przy tej samej elewacji (kąt nachylenia równy 30°). Dzięki temu można dostrzec zagęszczenia punktów, ich strukturę oraz sposób, w jaki dane „układają się” w przestrzeni.
 
-Do pierwszego eksperymentu klastrowania zastosowano algorytm KMeans dla krótszego wektora cech, zawierającego tylko wartości HSV dla pikseli o współczynniku zmienności CV $\leq 20\%$. Dane te były najbardziej zwarte, jednorodne i dobrze odwzorowywały kolorystykę nieba widoczną w górnej części obrazu.
+\begin{itemize}
+    \item Dane tworzą kilka charakterystycznych skupień, szczególnie widocznych w okolicach wysokiej jasności (duże wartości \(\widetilde{V}\)) oraz niskiego nasycenia.
+    \item Obszary odpowiadające wyższym wartościom \(\widetilde{H}\) (barwa) i \(\widetilde{S}\) (nasycenie) są mniej gęste, co może sugerować rzadsze występowanie żywych barw – zgodne z dominacją szarości w nagraniach.
+\end{itemize}
 
-Aby wyznaczyć optymalną liczbę klastrów $k$, przeprowadzono analizę wykresu łokciowego (ang. \textit{elbow plot}), który przedstawia sumę kwadratów błędów (inertia) w zależności od liczby klastrów. Punkt załamania wskazywał na wartość $k=4$ jako najlepszy kompromis między precyzją a prostotą modelu.
+\textbf{Dolna część rysunku} pokazuje rzuty 2D: pary zmiennych w układach \(\widetilde{H}\) vs \(\widetilde{S}\), \(\widetilde{H}\) vs \(\widetilde{V}\) oraz \(\widetilde{S}\) vs \(\widetilde{V}\). Na ich podstawie można zauważyć:
+
+\begin{itemize}
+    \item Istnienie pionowych pasm w układzie \(\widetilde{H}\) vs \(\widetilde{S}\), co sugeruje skokowo zmieniające się nasycenie przy ustalonej barwie (np. granica pomiędzy szarością a błękitem).
+    \item Wartości \(\widetilde{V}\) są silnie zróżnicowane – obecne są zarówno bardzo jasne, jak i bardzo ciemne próbki, co pokrywa się z rejestracją scen dziennych, wieczornych oraz zacienionych (np. tunele).
+    \item Nasycenie i jasność (\(\widetilde{S}, \widetilde{V}\)) tworzą wyraźne grupy punktów – jedna z nich o niskich wartościach obu zmiennych, odpowiadająca prawdopodobnie ciemnym i matowym scenom.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.99\textwidth]{image.png}
+    \caption{Rozkład danych w przestrzeni trójwymiarowej \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde{V}\).}
+    \label{fig:scatter_f2}
+\end{figure}
+
+Wnioski z tej wizualizacji były pomocne przy projektowaniu późniejszych metod klastrowania. Potwierdziły również potencjał nawet prostego, 3-wymiarowego wektora cech \(\vec{f}_2\) do oddzielania różnych typów scen.
+
+
+\subsection{Klastrowanie KMeans z wykorzystaniem wektora cech}
+
+W osobnym eksperymencie przeprowadzono klastrowanie danych reprezentowanych przez trójwymiarowy wektor cech \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\), zawierający medianę barwy, nasycenia i jasności dla każdego obrazu. Taka reprezentacja jest bardzo zwarta (tylko 3 cechy), ale niesie kluczowe informacje na temat dominujących kolorów w górnej części obrazu.
+
+Aby oszacować optymalną liczbę klastrów \(k\), obliczono dwa wskaźniki: \textbf{inercję} (suma odległości punktów od centroidów) oraz \textbf{Silhouette Score}. Ich przebieg przedstawiono na Rys.~\ref{fig:elbow_f2}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{elbow_plot.png}
-    \caption{Wykres łokciowy wskazujący optymalną liczbę klastrów $k=4$ dla krótszego wektora cech.}
-    \label{fig:elbow}
+    \caption{Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec{f}_2\).}
+    \label{fig:elbow_f2}
 \end{figure}
 
-Po wybraniu $k=4$, algorytm został uruchomiony ponownie w celu przypisania każdej klatki do jednego z czterech klastrów. Do wizualizacji wyników zastosowano redukcję wymiarów (np. PCA lub t-SNE), dzięki czemu możliwe było przedstawienie podziału klatek w przestrzeni 3D.
+Klasyfikacja oparta na \(\vec{f}_2\) pozwoliła na uzyskanie następujących klas:
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{kmeans_3d_clusters.png}
-    \caption{Wizualizacja klastrów KMeans ($k=4$) w przestrzeni zredukowanej do trzech wymiarów.}
-    \label{fig:kmeans_3d}
-\end{figure}
-
-Każdy z klastrów zawierał obrazy o charakterystycznych cechach kolorystycznych. W celu jakościowej oceny wyników zaprezentowano losowe próbki klatek z każdego klastra. Przykładowe obrazy zostały przedstawione poniżej:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{kmeans_sample_grid.png}
-    \caption{Przykładowe klatki przypisane do poszczególnych klastrów ($k=4$).}
-    \label{fig:kmeans_samples}
-\end{figure}
-
-Wyniki sugerują, że KMeans skutecznie wydzielił klastry odpowiadające różnym typom scen:
 \begin{itemize}
-    \item niebieskie, bezchmurne niebo,
-    \item szare niebo lub warstwa chmur,
-    \item ciemne ujęcia (np. tunel, zmierzch, cień),
-    \item sceny z zabudowaniami lub przeszkodami w górnej części obrazu.
-\end{itemize}
-
-
-\subsection{Klastrowanie względem dłuższego wektora cech}
-
-W kolejnym eksperymencie zastosowano algorytm KMeans dla tzw. dłuższego wektora cech – zawierającego wartości HSV dla wszystkich pikseli w górnej części obrazu ($96 \times 34$ piksele, czyli $9792$ wartości). W przeciwieństwie do wcześniejszego wariantu nie stosowano tutaj maski CV, co pozwalało uwzględnić więcej informacji z otoczenia, ale również zwiększało ryzyko wprowadzenia szumu do modelu.
-
-Z powodu wysokiego wymiaru i większej złożoności danych nie wykonano ponownie analizy wykresu łokciowego – założono $k=4$ dla spójności porównawczej z poprzednim podejściem.
-
-Podobnie jak wcześniej, przeprowadzono redukcję wymiarowości do trzech składowych i dokonano wizualizacji przestrzennej klastrów. W tym przypadku granice między klastrami okazały się mniej wyraźne, a rozkład danych bardziej rozproszony.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{kmeans_long_vector_3d.png}
-    \caption{Wizualizacja klastrów KMeans ($k=4$) dla dłuższego wektora cech. Przestrzeń po redukcji wymiarowości.}
-    \label{fig:kmeans_long_3d}
-\end{figure}
-
-Również w tym podejściu zaprezentowano przykładowe klatki z każdego klastra. Choć klastry nadal wykazywały pewną spójność, ich interpretacja była trudniejsza. Część klatek zawierała mieszane typy scen – np. fragment nieba częściowo przysłonięty zabudową – co utrudniało jednoznaczne przypisanie do konkretnej klasy.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{kmeans_long_sample_grid.png}
-    \caption{Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech.}
-    \label{fig:kmeans_long_samples}
-\end{figure}
-
-W porównaniu do wersji z krótszym wektorem, rezultaty uzyskane przy wykorzystaniu pełnej górnej części obrazu cechowały się niższą czytelnością. Zwiększona liczba cech mogła przyczynić się do nadmiernego dopasowania do szumu i mniejszej separowalności wizualnej poszczególnych klas.
-
-
-
-\subsection{Interpretacja wyników}
-
-Wyniki klastrowania metodą KMeans dla obu wektorów cech – krótszego (filtrowanego maską CV) i dłuższego (pełna górna część obrazu) – pozwalają na wysnucie kilku istotnych obserwacji.
-
-W przypadku \textbf{krótszego wektora}, klastry okazały się wyraźnie separowalne, a ich zawartość dała się jednoznacznie przypisać do określonych typów scen. Szczególnie dobrze widoczny był podział na cztery dominujące klasy:
-\begin{enumerate}
-    \item \textbf{Niebieskie niebo} – jasne, dobrze nasycone odcienie błękitu w górnej części obrazu.
-    \item \textbf{Szare niebo / chmury} – sceny z jednolitym, przytłumionym kolorem górnej części obrazu.
-    \item \textbf{Noc / tunel / cień} – sceny o bardzo niskiej jasności i nasyceniu.
-    \item \textbf{Zabudowania / przeszkody} – brak nieba lub jego częściowe zasłonięcie przez budynki, znaki, mosty itp.
-\end{enumerate}
-
-Dzięki uprzedniej selekcji pikseli o niskiej zmienności udało się wyizolować regiony istotne dla klasyfikacji kolorystyki nieba, co skutkowało spójnymi i łatwymi do zinterpretowania klastrami.
-
-Dla \textbf{dłuższego wektora cech}, mimo tej samej liczby klastrów ($k=4$), wyniki były mniej jednoznaczne. Granice między klastrami były rozmyte, a sceny należące do jednego klastra często znacznie różniły się od siebie wizualnie. Obecność elementów tła, które nie były związane z analizowanym celem (np. fragmenty budynków, znaki, słupy), mogła wprowadzać szum i zaburzać interpretację.
-
-Podsumowując:
-\begin{itemize}
-    \item krótszy wektor cech umożliwia efektywniejsze grupowanie scen pod kątem dominującego koloru nieba,
-    \item klastry są wyraźnie zróżnicowane i mogą być jednoznacznie opisane,
-    \item dłuższy wektor zawierał więcej informacji, ale niekoniecznie użytecznej – co skutkowało słabszą separowalnością.
-\end{itemize}
-
-\section{Klastrowanie DBSCAN}
-
-\subsection{Wybór parametru \textit{eps} na podstawie wykresu 5NN}
-
-Do kolejnego etapu analizy skupień wykorzystano algorytm DBSCAN (ang. \textit{Density-Based Spatial Clustering of Applications with Noise}), który w odróżnieniu od KMeans nie wymaga określenia liczby klastrów i potrafi wykrywać obszary o zmiennej gęstości oraz odrzucać punkty szumowe.
-
-Z racji wysokiej złożoności obliczeniowej i dużej liczby cech, klastrowanie DBSCAN przeprowadzono wyłącznie dla krótszego wektora HSV (z zastosowaną maską CV).
-
-Aby dobrać optymalną wartość parametru \textit{eps} (promień sąsiedztwa), posłużono się wykresem odległości do 5 najbliższych sąsiadów dla każdego punktu (tzw. \textit{5NN-distance plot}). Na wykresie tym obserwuje się moment gwałtownego „przejścia” – załamanie, które sugeruje sensowną wartość \textit{eps}. W naszym przypadku punkt ten występował w okolicach wartości $eps \approx 0.008$.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{5nn_plot.png}
-    \caption{Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx$ 0{,}008.}
-    \label{fig:5nn}
-\end{figure}
-
-Dla wybranego $eps=0.008$ przeprowadzono dalsze eksperymenty z różnymi wartościami parametru \textit{MinPts}, określającego minimalną liczbę punktów w sąsiedztwie wymaganych do uznania punktu za „rdzeniowy”.
-
-\subsection{Wizualizacje klastrowania dla \textit{eps} = 0.008 i różnych wartości \textit{MinPts}}
-
-Po wyznaczeniu wartości \textit{eps} = 0.008 przeprowadzono serię eksperymentów z różnymi ustawieniami parametru \textit{MinPts}, testując wartości od 4 do 10. Dla każdej konfiguracji wykonano klastrowanie oraz przygotowano wizualizacje rozkładu klastrów w przestrzeni 2D po redukcji wymiarów (np. metodą PCA lub t-SNE).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts4.png}
-    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts6.png}
-    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts10.png}
-    \caption{Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów.}
-    \label{fig:dbscan_param}
-\end{figure}
-
-Niestety, niezależnie od wybranej wartości \textit{MinPts}, wyniki DBSCAN nie dawały satysfakcjonujących podziałów. W większości przypadków:
-\begin{itemize}
-    \item liczba klastrów była bardzo mała (często tylko 2),
-    \item wiele punktów zostało oznaczonych jako szum (outliers),
-    \item brakowało klas, które odpowiadałyby logicznym podziałom zauważonym wcześniej przy użyciu KMeans.
-\end{itemize}
-
-Choć metoda DBSCAN posiada zdolność do wykrywania nieliniowych struktur i pomijania punktów odstających, w kontekście tej analizy – bazującej na subtelnych różnicach kolorystycznych – nie udało się uzyskać klastrów o sensownej interpretacji wizualnej.
-
-\subsection{Porównanie podziału na 4 klastry DBSCAN i 4Means}
-
-W celu porównania skuteczności obu podejść zestawiono wyniki klastrowania DBSCAN (dla $eps=0.008$ i różnych $MinPts$) z wcześniej uzyskanym podziałem na 4 klastry przy użyciu algorytmu KMeans (dla krótszego wektora cech).
-
-Podczas gdy KMeans pozwolił na uzyskanie klas, które dało się intuicyjnie zinterpretować jako:
-\begin{itemize}
-    \item niebieskie niebo,
-    \item szare niebo,
-    \item ciemne sceny (noc, tunel),
-    \item sceny z przesłonięciem górnej części obrazu,
-\end{itemize}
-to w przypadku DBSCAN taka interpretacja była praktycznie niemożliwa.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{dbscan_4clusters.png}
-    \includegraphics[width=0.45\textwidth]{kmeans_sample_grid.png}
-    \caption{Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans.}
-    \label{fig:compare_dbscan_kmeans}
-\end{figure}
-
-DBSCAN, mimo wielu prób, generował albo bardzo ogólne, albo zupełnie przypadkowe klastry. Dodatkowo duża liczba punktów była traktowana jako szum, co zmniejszało wartość poznawczą wyniku. Próby znalezienia czterech dobrze rozpoznawalnych klastrów – analogicznie jak w KMeans – zakończyły się niepowodzeniem.
-
-Z tego względu uznano, że algorytm DBSCAN nie nadaje się w tym przypadku jako główna metoda klastrowania scen na podstawie kolorystyki nieba. Został potraktowany wyłącznie jako uzupełnienie eksploracji, potwierdzające skuteczność klasycznego podejścia centroidowego.
-
-\section{Klastrowanie metodą Warda}
-
-\subsection{Dendrogram}
-
-Kolejną metodą klastrowania zastosowaną w projekcie była metoda Warda – jedno z podejść hierarchicznego grupowania aglomeracyjnego. W przeciwieństwie do metod takich jak KMeans, algorytmy hierarchiczne nie wymagają wcześniejszego określenia liczby klastrów – zamiast tego budują drzewiastą strukturę zwaną dendrogramem, która pozwala na analizę danych na różnych poziomach szczegółowości.
-
-Metoda Warda minimalizuje przyrost całkowitej wariancji wewnątrz klastrów przy każdym kolejnym połączeniu. Dzięki temu faworyzuje zwarte, kuliste klastry, podobnie jak KMeans.
-
-Analiza została przeprowadzona dla krótszego wektora cech (czyli HSV tylko dla pikseli o niskim CV), z ograniczoną próbą danych ze względu na złożoność obliczeniową (np. podpróbka 1000 obserwacji).
-
-Wynik przedstawiono w postaci dendrogramu:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{dendrogram.png}
-    \caption{Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów.}
-    \label{fig:dendrogram}
-\end{figure}
-
-Wysokość przecięcia drzewa odpowiada liczbie klastrów. Na podstawie wykresu uznano, że podziały na 3, 4 i 5 klastrów są najbardziej sensowne i zostały przeanalizowane w kolejnych krokach.
-
-\subsection{Wizualizacje podziałów na 3, 4 i 5 klastrów}
-
-Na podstawie dendrogramu utworzonego metodą Warda dokonano trzech różnych cięć drzewa, uzyskując odpowiednio 3, 4 i 5 klastrów. Dla każdej liczby klastrów wykonano redukcję wymiarowości (PCA) w celu wizualizacji podziału w przestrzeni 2D oraz zaprezentowano próbki klatek przypisanych do poszczególnych grup.
-
-\textbf{Podział na 3 klastry} skutkował zbyt ogólnym podziałem – klastry łączyły ze sobą sceny o zbliżonej jasności, ale różnej treści. Przykładowo: niebo i powierzchnie zabudowań o podobnym kolorze trafiały do jednego klastra, co utrudniało ich rozróżnienie.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{ward_3clusters.png}
-    \caption{Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań.}
-    \label{fig:ward_3}
-\end{figure}
-
-\textbf{Podział na 4 klastry} dał najlepsze rezultaty – klastry były wizualnie zbliżone do tych uzyskanych przy użyciu KMeans. Widoczne były grupy odpowiadające niebieskiemu niebu, szaremu niebu, ciemnym scenom (np. tunelom) oraz zabudowaniom. Różnicą w porównaniu do KMeans był fakt, że część ciemnych ujęć została wchłonięta do klastra o innej dominującej kolorystyce.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{ward_4clusters.png}
-    \caption{Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami.}
-    \label{fig:ward_4}
-\end{figure}
-
-\textbf{Podział na 5 klastrów} wprowadzał dodatkowy podział wśród klas już wcześniej sensownie wydzielonych. Efektem było m.in. rozdzielenie nieba na bardziej i mniej nasycone odcienie, jednak kosztem spójności interpretacyjnej i wzrostu złożoności analizy.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{ward_5clusters.png}
-    \caption{Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność.}
-    \label{fig:ward_5}
-\end{figure}
-
-\subsection{Interpretacja i porównanie z 4Means}
-
-Porównując wyniki klastrowania metodą Warda (dla $k=4$) z rezultatami algorytmu KMeans przy tej samej liczbie klastrów, zauważamy znaczące podobieństwa, a jednocześnie istotne różnice w strukturze grup.
-
-W obu przypadkach:
-\begin{itemize}
-    \item wyodrębniono klastry odpowiadające \textbf{niebieskiemu niebu}, \textbf{szaremu niebu}, \textbf{ciemnym scenom (noc/tunel)} oraz \textbf{scenom przesłoniętym (budynki, infrastruktura)},
-    \item podział danych był względnie równomierny, a klastry miały sensowną reprezentację wizualną,
-    \item klasy były separowalne w przestrzeni po redukcji wymiarowości.
-\end{itemize}
-
-Różnice pojawiły się natomiast na poziomie szczegółów:
-\begin{itemize}
-    \item w metodzie Warda część \textbf{ciemnych klatek} została przypisana do klastra z szarym niebem lub zabudowaniami, co może wynikać z podobieństw w jasności i nasyceniu tych scen,
-    \item KMeans – dzięki losowej inicjalizacji – lepiej rozdzielił fragmenty o zbliżonych barwach, ale różnym kontekście,
-    \item metoda Warda – jako podejście deterministyczne i hierarchiczne – wydaje się bardziej „konserwatywna” i mniej wrażliwa na lokalne fluktuacje kolorystyczne.
+    \item \textbf{Klaster 0} – obrazy z wyraźnie błękitnym niebem,
+    \item \textbf{Klaster 1} – sceny z szarym, zachmurzonym niebem lub niskim nasyceniem barwy,
+    \item \textbf{Klaster 2} – obrazy zawierające przeszkody lub zabudowania zamiast nieba,
+    \item \textbf{Klaster 3} – ciemne sceny odpowiadające porze nocnej lub tunelom.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{ward_vs_kmeans_4clusters.png}
-    \caption{Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen.}
-    \label{fig:ward_vs_kmeans}
+    \includegraphics[width=0.9\textwidth]{kmeans_3d_clusters.png}
+    \caption{Wyniki KMeans dla wektora \(\vec{f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych.}
+    \label{fig:kmeans_f2_clusters}
 \end{figure}
 
-Podsumowując, klastrowanie hierarchiczne metodą Warda potwierdziło podział scen obserwowany wcześniej w KMeans, ale pokazało również, że niektóre klastry mają nieostre granice – zwłaszcza te odpowiadające scenom zacienionym lub nocnym. Mimo tych różnic, oba podejścia prowadzą do spójnego i interpretowalnego podziału scen na podstawie cech kolorystycznych.
+Przykładowe obrazy z każdego klastra przedstawiono poniżej. Dzięki prostocie wektora \(\vec{f}_2\), separowalność scen była zaskakująco dobra, mimo ograniczonej liczby cech.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{kmeans_sample_grid.png}
+    \caption{Wybrane obrazy z czterech klastrów (KMeans, \(\vec{f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi.}
+    \label{fig:kmeans_f2_samples}
+\end{figure}
+
+Eksperyment ten potwierdził, że nawet przy bardzo zwartej reprezentacji, możliwe jest uzyskanie dobrze interpretowalnych klastrów – o ile cechy są dobrze dobrane i oddzielają kluczowe cechy sceny (barwa, jasność, nasycenie).
 
 
-\section{Podsumowanie}
-W niniejszym projekcie przeprowadzono eksploracyjną analizę klatek wyodrębnionych z nagrań wideo z kamer samochodowych, skupiając się na górnej części obrazów. Zastosowano różne metody klastrowania, z których najlepsze rezultaty dała metoda KMeans i metoda Warda z podziałem na 4 klastry.
 
-Najbardziej wartościowe okazało się podejście oparte na:
+\subsection{Klastrowanie DBSCAN z wykorzystaniem wektora 3-elementowego}
+
+W kolejnym eksperymencie klastrowania zastosowano algorytm DBSCAN na danych zredukowanych do trójwymiarowego wektora \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\). Podejście to miało na celu sprawdzenie, czy nawet przy minimalnej liczbie cech możliwe jest uzyskanie naturalnych skupień bez potrzeby określania liczby klastrów.
+
+\textbf{Wybór parametru \texttt{eps}} oparto o klasyczny wykres odległości do 5 najbliższych sąsiadów. Jak pokazano na Rysunku~\ref{fig:dbscan_eps2}, zauważalne załamanie krzywej następuje w okolicy wartości \( \texttt{eps} \approx 0.014 \), co zostało przyjęte jako punkt wyjściowy do eksperymentów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{5nn_plot.png}
+    \caption{Wykres 5-NN dla danych z wektorem \(\vec{f}_2\) – wybór parametru \texttt{eps}.}
+    \label{fig:dbscan_eps2}
+\end{figure}
+
+\textbf{Wyniki klastrowania} z wybranym \texttt{eps = 0.014} i domyślnym \texttt{MinPts = 5} przedstawiono na Rys.~\ref{fig:dbscan_f2_results}. Na wizualizacjach zaznaczono zarówno wszystkie punkty (łącznie z szumem), jak i tylko punkty przypisane do właściwych klastrów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{dbscan_f2_results.png}
+    \caption{Wyniki klastrowania DBSCAN dla \(\vec{f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu).}
+    \label{fig:dbscan_f2_results}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{dbscan_f2_results_more.png}
+    \caption{Więcej wynikó klastrowania DBSCAN dla \(\vec{f}_2\) –.}
+    \label{fig:dbscan_f2_results_more}
+\end{figure}
+
+
+Niestety, niezależnie od konfiguracji parametrów, wyniki nie były satysfakcjonujące. Algorytm:
 \begin{itemize}
-    \item selekcji pikseli o niskiej zmienności (CV $\leq 20\%$),
-    \item konwersji do przestrzeni barw HSV,
-    \item klastrowaniu z użyciem algorytmu KMeans przy liczbie klastrów $k=4$.
+    \item traktował ponad 90\% próbek jako \textbf{szum},
+    \item znajdował niewielkie, ciasne klastry w silnie ograniczonym fragmencie przestrzeni cech,
+    \item generował \textbf{klastry trudne do zinterpretowania} – jak pokazano na Rys.~\ref{fig:dbscan_samples}, nie były one jednoznacznie powiązane z kolorystyką nieba, przeszkodami ani warunkami oświetleniowymi.
 \end{itemize}
 
-Taki podział umożliwił wyróżnienie czterech głównych typów scen:
-\begin{enumerate}
-    \item niebieskie niebo,
-    \item szare niebo / chmury,
-    \item ciemne ujęcia (np. tunel, zmierzch),
-    \item fragmenty przesłonięte przez zabudowania lub infrastrukturę.
-\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{senseless_clusters.png}
+    \caption{Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej.}
+    \label{fig:dbscan_samples}
+\end{figure}
 
-Klastry odpowiadają różnym warunkom widoczności, takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody. Dominacja klas odpowiadających szarościom może sugerować występowanie pory wieczorowej w analizowanym materiale.
+Z powyższych powodów uznano, że \textbf{DBSCAN nie nadaje się do klastrowania} danych reprezentowanych przez \(\vec{f}_2\) – pomimo jego zalet w wykrywaniu nieregularnych skupień, wymaga on znacznie bardziej zróżnicowanej przestrzeni cech, niż zapewnia mediana HSV. W przeciwieństwie do KMeans, DBSCAN nie był w stanie rozpoznać i oddzielić scen z niebem, przeszkodami czy nocą.
+
+\subsection{Klastrowanie metodą Warda z wykorzystaniem wektora 3-elementowego}
+
+W celu sprawdzenia działania podejścia hierarchicznego zastosowano metodę Warda na danych reprezentowanych przez trójwymiarowy wektor cech \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\). Algorytm ten umożliwia analizę struktury danych bez potrzeby wcześniejszego określania liczby klastrów – bazując na minimalizacji wzrostu wariancji przy łączeniu grup.
+
+Na podstawie dendrogramu (Rys.~\ref{fig:ward_f2_dendro}) rozważono trzy potencjalne poziomy cięcia drzewa: 3, 4 oraz 5 klastrów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{dendrogram.png}
+    \caption{Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec{f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów.}
+    \label{fig:ward_f2_dendro}
+\end{figure}
+
+\textbf{Podział na 3 klastry} prowadził do zbyt ogólnych grup – trudno było jednoznacznie oddzielić np. sceny z szarym i niebieskim niebem.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{ward_3clusters.png}
+    \caption{Wizualizacja klastrowania Warda na 3 klastry – brak wyraźnego podziału między różnymi typami nieba.}
+\end{figure}
+
+\textbf{Podział na 5 klastrów} zapewniał dużą szczegółowość, jednak prowadził do nieco „rozczłonkowanych” grup, trudnych do jednoznacznej interpretacji.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{ward_5clusters.png}
+    \caption{Wizualizacja klastrów przy 5 klasach – struktura złożona, ale mniej intuicyjna.}
+\end{figure}
+
+Najlepsze rezultaty uzyskano przy \textbf{podziale na 4 klastry}, gdzie zauważalne były cztery sensowne grupy:
+
+\begin{itemize}
+    \item \textbf{Klaster 1 (pomarańczowy)} – sceny z zabudowaniami lub neutralnym tłem, często bez wyraźnego nieba,
+    \item \textbf{Klaster 2 (fioletowy)} – ciemne sceny (noc/tunel),
+    \item \textbf{Klaster 3 (niebieski)} – jasne sceny z błękitnym niebem,
+    \item \textbf{Klaster 4 (zielony)} – szare niebo, warunki pochmurne.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{ward_4clusters.png}
+    \caption{Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec{f}_2\).}
+    \label{fig:ward_f2_4clusters}
+\end{figure}
+
+Podział ten potwierdzają również próbki obrazów z każdego klastra (Rys.~\ref{fig:ward_f2_samples}). Widać wyraźnie, że algorytm poradził sobie z separacją scen o odmiennych cechach barwowych, mimo wykorzystania jedynie median HSV.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{wards_clusters.png}
+    \caption{Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom.}
+    \label{fig:ward_f2_samples}
+\end{figure}
+
+W porównaniu do DBSCAN i nawet KMeans, metoda Warda na wektorze \(\vec{f}_2\) okazała się bardzo skuteczna – szczególnie biorąc pod uwagę ograniczoną liczbę cech. Klasy były zwarte, dobrze separowalne i interpretowalne wizualnie.
+
+\subsection{Klastrowanie KMeans z wykorzystaniem wektora 7-elementowego}
+
+Ostatnim z testowanych podejść było zastosowanie algorytmu KMeans do danych opisanych siedmiowymiarowym wektorem cech \(\vec{f}_1\). Ten wariant uwzględniał zarówno statystyki przestrzeni HSV, jak i relacje między kanałami w RGB:
+
+\[
+    \vec{f}_1 =
+    \left[
+        \overline{V},
+        \sigma_V,
+        \text{IQR}_{RGB},
+        \frac{G}{R},
+        \frac{G}{B},
+        \overline{S},
+        \overline{H}
+        \right]
+\]
+
+Taka reprezentacja miała na celu uchwycenie bardziej złożonych zależności w danych – w tym informacji o rozrzucie wartości RGB oraz proporcjach kanałów, które są charakterystyczne np. dla błękitnego nieba.
+
+Do klastrowania ponownie przyjęto wartość \(k=4\), aby móc porównać wyniki z poprzednimi eksperymentami. Podział danych okazał się bardzo podobny do tego uzyskanego przy użyciu wektora \(\vec{f}_2\). Próbki z poszczególnych klastrów przedstawiono na Rys.~\ref{fig:kmeans_f1_samples}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{vector_1.png}
+    \caption{Wyniki KMeans dla wektora \(\vec{f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów.}
+    \label{fig:kmeans_f1_samples}
+\end{figure}
+
+Zidentyfikowane klastry można przypisać do następujących kategorii:
+\begin{itemize}
+    \item \textbf{Klaster 0} – jasne sceny z błękitnym niebem,
+    \item \textbf{Klaster 1} – dominacja szarości, pochmurne niebo lub zamglenie,
+    \item \textbf{Klaster 2} – przesłonięcie przez zabudowania lub wysokie obiekty,
+    \item \textbf{Klaster 3} – sceny ciemne, najprawdopodobniej nocne lub z tuneli.
+\end{itemize}
+
+Warto zauważyć, że mimo większej liczby cech, podział nie różnił się istotnie od tego uzyskanego z pomocą \(\vec{f}_2\), co sugeruje, że proste statystyki HSV wystarczają do separacji wizualnych klas w tym konkretnym problemie.
+
+Dodatkowe cechy RGB (takie jak IQR i proporcje kanałów) mogły poprawić separowalność danych w granicznych przypadkach, jednak nie wpłynęły znacząco na interpretację końcowych klastrów.
+
+\section{Podsumowanie i wnioski}
+
+Celem niniejszego projektu była eksploracyjna analiza skupień wybranych klatek z nagrań wideo z kamer samochodowych. Główne pytanie badawcze dotyczyło tego, czy możliwe jest zidentyfikowanie logicznych i interpretowalnych klastrów scen na podstawie dominujących kolorów w górnej części obrazu, które najczęściej odpowiadają niebu lub zabudowaniom.
+
+\subsection*{Najważniejsze obserwacje}
+
+\begin{itemize}
+    \item Najlepsze rezultaty klastrowania uzyskano przy wykorzystaniu algorytmu \textbf{KMeans} i podziale na \textbf{cztery klastry}, co umożliwiło wyodrębnienie następujących kategorii:
+          \begin{enumerate}
+              \item błękitne niebo,
+              \item szare niebo / chmury,
+              \item ciemne sceny (noc / tunel),
+              \item zabudowania i inne przeszkody w górnej części obrazu.
+          \end{enumerate}
+
+    \item Reprezentacje cech opierające się na przestrzeni \textbf{HSV} okazały się wystarczające do skutecznego grupowania danych. Nawet bardzo kompaktowy wektor \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\) umożliwił uzyskanie przejrzystych klastrów o sensownej interpretacji.
+
+    \item Wektor \(\vec{f}_1\), zawierający dodatkowe cechy z przestrzeni RGB (takie jak IQR i proporcje kanałów), nie przyniósł wyraźnej poprawy jakości podziału, ale potwierdził stabilność wyników.
+
+    \item Algorytm \textbf{DBSCAN}, mimo swojej zdolności do detekcji nieliniowych struktur i odrzucania punktów szumowych, nie sprawdził się w analizowanym przypadku. Ponad 90\% próbek było oznaczanych jako szum, a znalezione klastry były małe i trudne do interpretacji.
+
+    \item Metoda \textbf{Warda} (klastrowanie hierarchiczne) dostarczyła rezultatów porównywalnych z KMeans, szczególnie przy podziale na cztery klastry. Jej dodatkową zaletą była możliwość eksploracji struktury danych na różnych poziomach szczegółowości.
+\end{itemize}
+
+\subsection*{Wnioski ogólne}
+
+Projekt potwierdził, że stosunkowo prosta reprezentacja danych wizualnych, ograniczona do górnych partii obrazu i przekształcona do przestrzeni HSV, wystarcza do skutecznego klastrowania scen drogowych. Zastosowanie filtracji opartej na współczynniku zmienności (CV) dodatkowo poprawiło jakość ekstrakcji cech.
+
+Wyniki mogą być traktowane jako punkt wyjścia do bardziej zaawansowanych analiz – np.:
+\begin{itemize}
+    \item klasyfikacji pory dnia,
+    \item detekcji pogorszenia widoczności,
+    \item pośredniej oceny warunków atmosferycznych.
+\end{itemize}
+
+Dodatkowo, dominacja scen z szarym niebem może skłaniać do hipotez nt. warunków pogodowych w analizowanym okresie nagrań, jednak nie należy nadinterpretować tego w kontekście jakości powietrza – ze względu na ograniczoną rozdzielczość i percepcyjne zniekształcenia kamery.
+
+\subsection*{Kierunki dalszych badań}
+
+Możliwości rozszerzenia projektu obejmują m.in.:
+\begin{itemize}
+    \item użycie głębszych cech wizualnych (np. embeddingów CNN),
+    \item automatyczne etykietowanie scen na podstawie danych GPS / czasu / pogody,
+    \item analizę zmian klas w czasie (ciągłość klastrów w wideo),
+    \item testowanie innych algorytmów klastrowania (np. HDBSCAN, GMM).
+\end{itemize}
+
+Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić skuteczne narzędzie eksploracyjne dla danych wideo, nawet w przypadku zastosowania bardzo ograniczonych cech wejściowych.
+
 
 \end{document}
