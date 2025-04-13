@@ -42,14 +42,29 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech.}}{10}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:kmeans_long_samples}{{10}{10}{Przykładowe klatki przypisane do klastrów KMeans dla dłuższego wektora cech}{figure.caption.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Interpretacja wyników}{10}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Klastrowanie DBSCAN}{10}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Wybór parametru eps}{10}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Wizualizacje dla różnych wartości MinPts}{10}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Porównanie z KMeans}{10}{subsection.4.3}\protected@file@percent }
-\bibcite{epec2024}{1}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Klastrowanie metodą Warda}{11}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dendrogram}{11}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Podziały na 3, 4 i 5 klastrów}{11}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Interpretacja i porównanie z KMeans}{11}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Wnioski}{11}{section.6}\protected@file@percent }
-\gdef \@abspage@last{11}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Klastrowanie DBSCAN}{11}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Wybór parametru \textit  {eps} na podstawie wykresu 5NN}{11}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx $ 0{,}008.}}{11}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:5nn}{{11}{11}{Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx $ 0{,}008}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Wizualizacje klastrowania dla \textit  {eps} = 0.008 i różnych wartości \textit  {MinPts}}{12}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów.}}{12}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:dbscan_param}{{12}{12}{Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Porównanie podziału na 4 klastry DBSCAN i 4Means}{12}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans.}}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:compare_dbscan_kmeans}{{13}{13}{Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Klastrowanie metodą Warda}{13}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dendrogram}{13}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów.}}{14}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:dendrogram}{{14}{14}{Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Wizualizacje podziałów na 3, 4 i 5 klastrów}{14}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań.}}{15}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:ward_3}{{15}{15}{Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami.}}{16}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:ward_4}{{16}{16}{Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność.}}{17}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:ward_5}{{17}{17}{Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Interpretacja i porównanie z 4Means}{17}{subsection.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen.}}{18}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:ward_vs_kmeans}{{18}{18}{Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Podsumowanie}{18}{section.6}\protected@file@percent }
+\gdef \@abspage@last{18}

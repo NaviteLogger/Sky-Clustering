@@ -235,33 +235,192 @@ W porównaniu do wersji z krótszym wektorem, rezultaty uzyskane przy wykorzysta
 
 
 \subsection{Interpretacja wyników}
-Interpretacja czterech klastrów: niebieskie niebo, szare niebo, noc/tunel, przeszkody.
+
+Wyniki klastrowania metodą KMeans dla obu wektorów cech – krótszego (filtrowanego maską CV) i dłuższego (pełna górna część obrazu) – pozwalają na wysnucie kilku istotnych obserwacji.
+
+W przypadku \textbf{krótszego wektora}, klastry okazały się wyraźnie separowalne, a ich zawartość dała się jednoznacznie przypisać do określonych typów scen. Szczególnie dobrze widoczny był podział na cztery dominujące klasy:
+\begin{enumerate}
+    \item \textbf{Niebieskie niebo} – jasne, dobrze nasycone odcienie błękitu w górnej części obrazu.
+    \item \textbf{Szare niebo / chmury} – sceny z jednolitym, przytłumionym kolorem górnej części obrazu.
+    \item \textbf{Noc / tunel / cień} – sceny o bardzo niskiej jasności i nasyceniu.
+    \item \textbf{Zabudowania / przeszkody} – brak nieba lub jego częściowe zasłonięcie przez budynki, znaki, mosty itp.
+\end{enumerate}
+
+Dzięki uprzedniej selekcji pikseli o niskiej zmienności udało się wyizolować regiony istotne dla klasyfikacji kolorystyki nieba, co skutkowało spójnymi i łatwymi do zinterpretowania klastrami.
+
+Dla \textbf{dłuższego wektora cech}, mimo tej samej liczby klastrów ($k=4$), wyniki były mniej jednoznaczne. Granice między klastrami były rozmyte, a sceny należące do jednego klastra często znacznie różniły się od siebie wizualnie. Obecność elementów tła, które nie były związane z analizowanym celem (np. fragmenty budynków, znaki, słupy), mogła wprowadzać szum i zaburzać interpretację.
+
+Podsumowując:
+\begin{itemize}
+    \item krótszy wektor cech umożliwia efektywniejsze grupowanie scen pod kątem dominującego koloru nieba,
+    \item klastry są wyraźnie zróżnicowane i mogą być jednoznacznie opisane,
+    \item dłuższy wektor zawierał więcej informacji, ale niekoniecznie użytecznej – co skutkowało słabszą separowalnością.
+\end{itemize}
 
 \section{Klastrowanie DBSCAN}
-\subsection{Wybór parametru eps}
-Wykres 5NN do wyboru parametru eps.
 
-\subsection{Wizualizacje dla różnych wartości MinPts}
-Wizualizacje klastrowania dla eps=0.008 i różnych wartości MinPts, analiza wyników.
+\subsection{Wybór parametru \textit{eps} na podstawie wykresu 5NN}
 
-\subsection{Porównanie z KMeans}
-Porównanie podziału na 4 klastry DBSCAN i KMeans, trudności w interpretacji klastrów DBSCAN.
+Do kolejnego etapu analizy skupień wykorzystano algorytm DBSCAN (ang. \textit{Density-Based Spatial Clustering of Applications with Noise}), który w odróżnieniu od KMeans nie wymaga określenia liczby klastrów i potrafi wykrywać obszary o zmiennej gęstości oraz odrzucać punkty szumowe.
+
+Z racji wysokiej złożoności obliczeniowej i dużej liczby cech, klastrowanie DBSCAN przeprowadzono wyłącznie dla krótszego wektora HSV (z zastosowaną maską CV).
+
+Aby dobrać optymalną wartość parametru \textit{eps} (promień sąsiedztwa), posłużono się wykresem odległości do 5 najbliższych sąsiadów dla każdego punktu (tzw. \textit{5NN-distance plot}). Na wykresie tym obserwuje się moment gwałtownego „przejścia” – załamanie, które sugeruje sensowną wartość \textit{eps}. W naszym przypadku punkt ten występował w okolicach wartości $eps \approx 0.008$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{5nn_plot.png}
+    \caption{Wykres 5NN – odległości do piątego najbliższego sąsiada dla wszystkich punktów. Załamanie sugeruje wybór eps $\approx$ 0{,}008.}
+    \label{fig:5nn}
+\end{figure}
+
+Dla wybranego $eps=0.008$ przeprowadzono dalsze eksperymenty z różnymi wartościami parametru \textit{MinPts}, określającego minimalną liczbę punktów w sąsiedztwie wymaganych do uznania punktu za „rdzeniowy”.
+
+\subsection{Wizualizacje klastrowania dla \textit{eps} = 0.008 i różnych wartości \textit{MinPts}}
+
+Po wyznaczeniu wartości \textit{eps} = 0.008 przeprowadzono serię eksperymentów z różnymi ustawieniami parametru \textit{MinPts}, testując wartości od 4 do 10. Dla każdej konfiguracji wykonano klastrowanie oraz przygotowano wizualizacje rozkładu klastrów w przestrzeni 2D po redukcji wymiarów (np. metodą PCA lub t-SNE).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts4.png}
+    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts6.png}
+    \includegraphics[width=0.31\textwidth]{dbscan_eps0008_minpts10.png}
+    \caption{Przykładowe wyniki DBSCAN dla $eps = 0.008$ i różnych wartości $MinPts$. Widoczny silny wpływ parametrów na strukturę klastrów.}
+    \label{fig:dbscan_param}
+\end{figure}
+
+Niestety, niezależnie od wybranej wartości \textit{MinPts}, wyniki DBSCAN nie dawały satysfakcjonujących podziałów. W większości przypadków:
+\begin{itemize}
+    \item liczba klastrów była bardzo mała (często tylko 2),
+    \item wiele punktów zostało oznaczonych jako szum (outliers),
+    \item brakowało klas, które odpowiadałyby logicznym podziałom zauważonym wcześniej przy użyciu KMeans.
+\end{itemize}
+
+Choć metoda DBSCAN posiada zdolność do wykrywania nieliniowych struktur i pomijania punktów odstających, w kontekście tej analizy – bazującej na subtelnych różnicach kolorystycznych – nie udało się uzyskać klastrów o sensownej interpretacji wizualnej.
+
+\subsection{Porównanie podziału na 4 klastry DBSCAN i 4Means}
+
+W celu porównania skuteczności obu podejść zestawiono wyniki klastrowania DBSCAN (dla $eps=0.008$ i różnych $MinPts$) z wcześniej uzyskanym podziałem na 4 klastry przy użyciu algorytmu KMeans (dla krótszego wektora cech).
+
+Podczas gdy KMeans pozwolił na uzyskanie klas, które dało się intuicyjnie zinterpretować jako:
+\begin{itemize}
+    \item niebieskie niebo,
+    \item szare niebo,
+    \item ciemne sceny (noc, tunel),
+    \item sceny z przesłonięciem górnej części obrazu,
+\end{itemize}
+to w przypadku DBSCAN taka interpretacja była praktycznie niemożliwa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{dbscan_4clusters.png}
+    \includegraphics[width=0.45\textwidth]{kmeans_sample_grid.png}
+    \caption{Porównanie klastrów DBSCAN (lewo) i KMeans (prawo) przy $k=4$. Widoczna znacznie lepsza separowalność w przypadku KMeans.}
+    \label{fig:compare_dbscan_kmeans}
+\end{figure}
+
+DBSCAN, mimo wielu prób, generował albo bardzo ogólne, albo zupełnie przypadkowe klastry. Dodatkowo duża liczba punktów była traktowana jako szum, co zmniejszało wartość poznawczą wyniku. Próby znalezienia czterech dobrze rozpoznawalnych klastrów – analogicznie jak w KMeans – zakończyły się niepowodzeniem.
+
+Z tego względu uznano, że algorytm DBSCAN nie nadaje się w tym przypadku jako główna metoda klastrowania scen na podstawie kolorystyki nieba. Został potraktowany wyłącznie jako uzupełnienie eksploracji, potwierdzające skuteczność klasycznego podejścia centroidowego.
 
 \section{Klastrowanie metodą Warda}
+
 \subsection{Dendrogram}
-Prezentacja dendrogramu uzyskanego metodą Warda.
 
-\subsection{Podziały na 3, 4 i 5 klastrów}
-Wizualizacje podziałów na różną liczbę klastrów, analiza podobieństw do wyników KMeans.
+Kolejną metodą klastrowania zastosowaną w projekcie była metoda Warda – jedno z podejść hierarchicznego grupowania aglomeracyjnego. W przeciwieństwie do metod takich jak KMeans, algorytmy hierarchiczne nie wymagają wcześniejszego określenia liczby klastrów – zamiast tego budują drzewiastą strukturę zwaną dendrogramem, która pozwala na analizę danych na różnych poziomach szczegółowości.
 
-\subsection{Interpretacja i porównanie z KMeans}
-Interpretacja klastrów uzyskanych metodą Warda, porównanie z wynikami KMeans.
+Metoda Warda minimalizuje przyrost całkowitej wariancji wewnątrz klastrów przy każdym kolejnym połączeniu. Dzięki temu faworyzuje zwarte, kuliste klastry, podobnie jak KMeans.
 
-\section{Wnioski}
-Podsumowanie wyników analizy, dominacja szarego nieba, stosunek niebieskiego do szarego nieba, odniesienie do pracy z konferencji EPEC 2024 dotyczącej wpływu zanieczyszczeń na kolor nieba.
+Analiza została przeprowadzona dla krótszego wektora cech (czyli HSV tylko dla pikseli o niskim CV), z ograniczoną próbą danych ze względu na złożoność obliczeniową (np. podpróbka 1000 obserwacji).
 
-\begin{thebibliography}{9}
-    \bibitem{epec2024}
-\end{thebibliography}
+Wynik przedstawiono w postaci dendrogramu:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dendrogram.png}
+    \caption{Dendrogram wygenerowany metodą Warda na bazie krótszego wektora HSV. Widoczne naturalne punkty podziału na 3–5 klastrów.}
+    \label{fig:dendrogram}
+\end{figure}
+
+Wysokość przecięcia drzewa odpowiada liczbie klastrów. Na podstawie wykresu uznano, że podziały na 3, 4 i 5 klastrów są najbardziej sensowne i zostały przeanalizowane w kolejnych krokach.
+
+\subsection{Wizualizacje podziałów na 3, 4 i 5 klastrów}
+
+Na podstawie dendrogramu utworzonego metodą Warda dokonano trzech różnych cięć drzewa, uzyskując odpowiednio 3, 4 i 5 klastrów. Dla każdej liczby klastrów wykonano redukcję wymiarowości (PCA) w celu wizualizacji podziału w przestrzeni 2D oraz zaprezentowano próbki klatek przypisanych do poszczególnych grup.
+
+\textbf{Podział na 3 klastry} skutkował zbyt ogólnym podziałem – klastry łączyły ze sobą sceny o zbliżonej jasności, ale różnej treści. Przykładowo: niebo i powierzchnie zabudowań o podobnym kolorze trafiały do jednego klastra, co utrudniało ich rozróżnienie.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ward_3clusters.png}
+    \caption{Wizualizacja podziału na 3 klastry metodą Warda. Podział zbyt ogólny – zlewanie się nieba i zabudowań.}
+    \label{fig:ward_3}
+\end{figure}
+
+\textbf{Podział na 4 klastry} dał najlepsze rezultaty – klastry były wizualnie zbliżone do tych uzyskanych przy użyciu KMeans. Widoczne były grupy odpowiadające niebieskiemu niebu, szaremu niebu, ciemnym scenom (np. tunelom) oraz zabudowaniom. Różnicą w porównaniu do KMeans był fakt, że część ciemnych ujęć została wchłonięta do klastra o innej dominującej kolorystyce.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ward_4clusters.png}
+    \caption{Wizualizacja podziału na 4 klastry metodą Warda. Podział najbardziej zbliżony do KMeans, ale z lekkimi przesunięciami.}
+    \label{fig:ward_4}
+\end{figure}
+
+\textbf{Podział na 5 klastrów} wprowadzał dodatkowy podział wśród klas już wcześniej sensownie wydzielonych. Efektem było m.in. rozdzielenie nieba na bardziej i mniej nasycone odcienie, jednak kosztem spójności interpretacyjnej i wzrostu złożoności analizy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ward_5clusters.png}
+    \caption{Wizualizacja podziału na 5 klastrów – wzrost szczegółowości, ale mniejsza interpretowalność.}
+    \label{fig:ward_5}
+\end{figure}
+
+\subsection{Interpretacja i porównanie z 4Means}
+
+Porównując wyniki klastrowania metodą Warda (dla $k=4$) z rezultatami algorytmu KMeans przy tej samej liczbie klastrów, zauważamy znaczące podobieństwa, a jednocześnie istotne różnice w strukturze grup.
+
+W obu przypadkach:
+\begin{itemize}
+    \item wyodrębniono klastry odpowiadające \textbf{niebieskiemu niebu}, \textbf{szaremu niebu}, \textbf{ciemnym scenom (noc/tunel)} oraz \textbf{scenom przesłoniętym (budynki, infrastruktura)},
+    \item podział danych był względnie równomierny, a klastry miały sensowną reprezentację wizualną,
+    \item klasy były separowalne w przestrzeni po redukcji wymiarowości.
+\end{itemize}
+
+Różnice pojawiły się natomiast na poziomie szczegółów:
+\begin{itemize}
+    \item w metodzie Warda część \textbf{ciemnych klatek} została przypisana do klastra z szarym niebem lub zabudowaniami, co może wynikać z podobieństw w jasności i nasyceniu tych scen,
+    \item KMeans – dzięki losowej inicjalizacji – lepiej rozdzielił fragmenty o zbliżonych barwach, ale różnym kontekście,
+    \item metoda Warda – jako podejście deterministyczne i hierarchiczne – wydaje się bardziej „konserwatywna” i mniej wrażliwa na lokalne fluktuacje kolorystyczne.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ward_vs_kmeans_4clusters.png}
+    \caption{Porównanie klastrów uzyskanych metodą Warda i KMeans dla $k=4$. Zbliżona struktura, z różnicami w klasyfikacji ciemnych scen.}
+    \label{fig:ward_vs_kmeans}
+\end{figure}
+
+Podsumowując, klastrowanie hierarchiczne metodą Warda potwierdziło podział scen obserwowany wcześniej w KMeans, ale pokazało również, że niektóre klastry mają nieostre granice – zwłaszcza te odpowiadające scenom zacienionym lub nocnym. Mimo tych różnic, oba podejścia prowadzą do spójnego i interpretowalnego podziału scen na podstawie cech kolorystycznych.
+
+
+\section{Podsumowanie}
+W niniejszym projekcie przeprowadzono eksploracyjną analizę klatek wyodrębnionych z nagrań wideo z kamer samochodowych, skupiając się na górnej części obrazów. Zastosowano różne metody klastrowania, z których najlepsze rezultaty dała metoda KMeans i metoda Warda z podziałem na 4 klastry.
+
+Najbardziej wartościowe okazało się podejście oparte na:
+\begin{itemize}
+    \item selekcji pikseli o niskiej zmienności (CV $\leq 20\%$),
+    \item konwersji do przestrzeni barw HSV,
+    \item klastrowaniu z użyciem algorytmu KMeans przy liczbie klastrów $k=4$.
+\end{itemize}
+
+Taki podział umożliwił wyróżnienie czterech głównych typów scen:
+\begin{enumerate}
+    \item niebieskie niebo,
+    \item szare niebo / chmury,
+    \item ciemne ujęcia (np. tunel, zmierzch),
+    \item fragmenty przesłonięte przez zabudowania lub infrastrukturę.
+\end{enumerate}
+
+Klastry odpowiadają różnym warunkom widoczności, takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody. Dominacja klas odpowiadających szarościom może sugerować występowanie pory wieczorowej w analizowanym materiale.
 
 \end{document}
