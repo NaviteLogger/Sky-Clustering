@@ -1,0 +1,22 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "name": "LaTeX",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "aaron-bond.better-comments",
+                "James-Yu.latex-workshop"
+            ]
+        }
+    },
+    "features": {},
+    "runArgs": [
+        "--hostname",
+        "latex-devcontainer",
+        "--name",
+        "latex-devcontainer"
+    ]
+}
