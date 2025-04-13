@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1744547509.02906 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744547516.19991 0
+["pdflatex"] 1744547582.16975 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744547588.04925 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -112,7 +112,7 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1743313660 5501089 f2ffe622267f7d8bfaba0244ab87ba6f ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1743313810 3345755 ba2ca5aadbc395a8eb3e969a7d392ec2 ""
   "/usr/local/texlive/2025/texmf.cnf" 1743313649 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "/workspaces/Sky-Clustering/project.tex" 1744547516.92473 31616 b329ce64ece92ec4153866252732d61c ""
+  "/workspaces/Sky-Clustering/project.tex" 1744547589.7679 31616 b329ce64ece92ec4153866252732d61c ""
   "5nn_plot.png" 1744546911.71429 53023 67fc0c4820d743ec4d7d47bf2ff80b26 ""
   "dbscan_4clusters.png" 1744547123.02523 427220 fcffc99449cc14e03ab03a4e39f49112 ""
   "dbscan_eps0008_minpts10.png" 1744547087.88583 341551 f82068fa57eef414bba056b9b65f0fe0 ""
@@ -126,11 +126,11 @@
   "kmeans_long_sample_grid.png" 1744546644.7255 516640 05eb3f10338e8fa51c51229f3bea16a9 ""
   "kmeans_long_vector_3d.png" 1744546584.11812 642852 d8f573b507aa854eec7e65c81bcb6d62 ""
   "kmeans_sample_grid.png" 1744546521.1506 471452 9bf1e579b0f4cf643c9c6c239b6ce0dd ""
-  "mapa_trasy.png" 1744544576.61007 1337284 35c14a73a43c7758b2953c13f803b099 ""
+  "mapa_trasy.png" 1744547580.20701 3591613 427e9015e7160f387c8b1cbace43a509 ""
   "maska_cv.png" 1744545992.68585 2409173 4f6e4aea369831b3fa9a4c8891492c89 ""
-  "project.aux" 1744547524.09893 10521 89f392ee56a1018b0ca48cda2458a8c1 "pdflatex"
-  "project.out" 1744547524.10869 5281 4eaf70d421121254a848e6af14bf629c "pdflatex"
-  "project.tex" 1744547516.92473 31616 b329ce64ece92ec4153866252732d61c ""
+  "project.aux" 1744547596.35216 10521 89f392ee56a1018b0ca48cda2458a8c1 "pdflatex"
+  "project.out" 1744547596.36034 5281 4eaf70d421121254a848e6af14bf629c "pdflatex"
+  "project.tex" 1744547589.7679 31616 b329ce64ece92ec4153866252732d61c ""
   "scatter_hsv.png" 1744546257.80796 685417 eaeeed56b9342d7ec37f950d36efd416 ""
   "scatter_hsv_3d.png" 1744546221.28399 952508 bdca59c83e08680dd91e953ad56389fe ""
   "ward_3clusters.png" 1744547259.52276 227634 31e460c76f9ac05053bcf26be3deb2a8 ""
