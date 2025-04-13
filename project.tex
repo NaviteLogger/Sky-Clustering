@@ -19,6 +19,10 @@
 
 \maketitle
 
+\begin{abstract}
+    Celem niniejszego projektu jest eksploracyjna analiza klatek wyodrębnionych z nagrań wideo pochodzących z kamer samochodowych. Skupiono się na górnej części obrazów, zawierającej najczęściej niebo, które może pośrednio odzwierciedlać jakość powietrza. Obrazy zostały przekształcone z przestrzeni RGB do HSV i poddane selekcji oraz redukcji wymiarowości w oparciu o analizę zmienności pikseli. Następnie zastosowano trzy metody klastrowania: KMeans, DBSCAN i hierarchiczną metodę Warda. Najlepsze rezultaty pod względem interpretowalności uzyskano przy podziale na cztery klastry, które odpowiadają różnym warunkom widoczności – takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody. Dominacja klas odpowiadających szarościom może sugerować występowanie zanieczyszczeń powietrza w analizowanym materiale wideo.
+\end{abstract}
+
 \section{Wstęp}
 \subsection{Cel i zakres analizy}
 W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny jakości powietrza. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych fragmentów obrazu bez potrzeby nadzoru.
