@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-    Celem niniejszego projektu jest eksploracyjna analiza klatek wyodrębnionych z nagrań wideo pochodzących z kamer samochodowych. Skupiono się na górnej części obrazów, zawierającej najczęściej niebo, które może pośrednio odzwierciedlać moment dnia nagrania. Obrazy zostały przekształcone z przestrzeni RGB do HSV i poddane selekcji oraz redukcji wymiarowości w oparciu o analizę zmienności pikseli. Następnie zastosowano trzy metody klastrowania: KMeans, DBSCAN i hierarchiczną metodę Warda. Najlepsze rezultaty pod względem interpretowalności uzyskano przy podziale na cztery klastry, które odpowiadają różnym kolorom interesujących nas pixeli – takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody.
+    Celem niniejszego projektu jest eksploracyjna analiza klatek wyodrębnionych z nagrań wideo pochodzących z kamer samochodowych. Skupiono się na górnej części obrazów, zawierającej najczęściej niebo, które może pośrednio odzwierciedlać moment dnia nagrania. Obrazy zostały przekształcone z przestrzeni RGB do HSV i poddane selekcji oraz redukcji wymiarowości w oparciu o analizę zmienności pikseli. Następnie zastosowano trzy metody klastrowania: KMeans, DBSCAN i hierarchiczną metodę Warda. Najlepsze rezultaty pod względem interpretowalności uzyskano przy podziale na cztery klastry, które odpowiadają różnym kolorom interesujących nas pikseli – takim jak niebieskie niebo, szare niebo, noc/tunel oraz przeszkody.
 \end{abstract}
 
 \section{Wstęp}
@@ -174,7 +174,7 @@ Gdzie:
     \item \(\overline{S}\), \(\overline{H}\) – średnie wartości nasycenia (Saturation) i barwy (Hue).
 \end{itemize}
 
-\textbf{Drugi wektor cech \(\vec{f}_2\)} to minimalna, trzywymiarowa reprezentacja:
+\textbf{Drugi wektor cech \(\vec{f}_2\)} to minimalna, trójwymiarowa reprezentacja:
 
 \[
     \vec{f}_2 =
