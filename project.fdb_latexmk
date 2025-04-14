@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1744660698.5912 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744660705.57784 0
+["pdflatex"] 1744661069.23869 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744661075.83556 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -108,7 +108,7 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1743313660 5501089 f2ffe622267f7d8bfaba0244ab87ba6f ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1743313810 3345755 ba2ca5aadbc395a8eb3e969a7d392ec2 ""
   "/usr/local/texlive/2025/texmf.cnf" 1743313649 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "/workspaces/Sky-Clustering/project.tex" 1744660708.94668 29812 9499affa0f0a5cfa93ef459d7e410a4b ""
+  "/workspaces/Sky-Clustering/project.tex" 1744661079.09242 29822 4825a643efd1da00145127b586f48d53 ""
   "5nn_plot.png" 1744546911.71429 53023 67fc0c4820d743ec4d7d47bf2ff80b26 ""
   "cv_cum.png" 1744651263.80745 132758 c4e62ce552b078a9f88874a08f62e0b8 ""
   "cv_min_max.png" 1744651232.88564 110324 3fb17a6b25b1d04081b62964d027800a ""
@@ -121,9 +121,9 @@
   "kmeans_sample_grid.png" 1744546521.1506 471452 9bf1e579b0f4cf643c9c6c239b6ce0dd ""
   "mapa_trasy.png" 1744547580.20701 3591613 427e9015e7160f387c8b1cbace43a509 ""
   "maska_cv.png" 1744545992.68585 2409173 4f6e4aea369831b3fa9a4c8891492c89 ""
-  "project.aux" 1744660716.10324 11341 f5bc9709ccffa14b6ba47bdf5a9c792a "pdflatex"
-  "project.out" 1744660716.10996 3409 cde8619447b523882ec9e49377315aad "pdflatex"
-  "project.tex" 1744660708.94668 29812 9499affa0f0a5cfa93ef459d7e410a4b ""
+  "project.aux" 1744661086.329 11341 f5bc9709ccffa14b6ba47bdf5a9c792a "pdflatex"
+  "project.out" 1744661086.33706 3409 cde8619447b523882ec9e49377315aad "pdflatex"
+  "project.tex" 1744661079.09242 29822 4825a643efd1da00145127b586f48d53 ""
   "senseless_clusters.png" 1744651536.2405 520881 2f6b9f67218c40284b50ee276f30e16c ""
   "vector_1.png" 1744651633.35363 440556 e959c050300b3ad7e152782372b5488e ""
   "very_nice_histograms.png" 1744658838.61881 145824 c3a292eb38d8a35a9fbe3a03826e3fcd ""

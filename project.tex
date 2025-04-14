@@ -69,7 +69,7 @@ W początkowej fazie analizy pozyskano łącznie 44 412 klatek, które następni
 
 Z nagrań wideo pozyskanych z kamery samochodowej wyodrębniono pojedyncze klatki, po 60 na sekundę nagrania. Proces ekstrakcji został przeprowadzony przy użyciu skryptu automatyzującego odczyt kolejnych ramek z plików wideo oraz zapis ich jako obrazów w formacie \texttt{.png}.
 
-Każda z klatek została przeskalowana (licząc średnią z grup pixeli) z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
+Każda z klatek została przeskalowana (licząc średnią z grup pikseli) z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
 
 Dla każdej przeskalowanej klatki obliczono wektor cech, w którym każdy piksel był reprezentowany trzema wartościami odpowiadającymi składowym koloru w przestrzeni RGB. Ostatecznie więc pojedynczy obraz o rozmiarze $240 \times 80$ zawierał $240 \times 80 = 19.200$ pikseli, a wektor cech miał długość $19.200 \times 3 = 57\ 600$ elementów.
 
@@ -435,24 +435,24 @@ Celem niniejszego projektu była eksploracyjna analiza skupień wybranych klatek
 
 Projekt potwierdził, że stosunkowo prosta reprezentacja danych wizualnych, ograniczona do górnych partii obrazu i przekształcona do przestrzeni HSV, wystarcza do skutecznego klastrowania scen drogowych. Zastosowanie filtracji opartej na współczynniku zmienności (CV) dodatkowo poprawiło jakość ekstrakcji cech.
 
-Wyniki mogą być traktowane jako punkt wyjścia do bardziej zaawansowanych analiz – np.:
+Wyniki mogą być traktowane jako punkt wyjścia do bardziej zaawansowanych analiz,  np.:
 \begin{itemize}
     \item klasyfikacji pory dnia,
     \item detekcji pogorszenia widoczności,
     \item pośredniej oceny warunków atmosferycznych.
 \end{itemize}
 
-Dodatkowo, dominacja scen z szarym niebem może skłaniać do hipotez nt. zanieczyszczenia powietrza  w analizowanym okresie nagrań. Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić skuteczne narzędzie eksploracyjne dla danych wideo, nawet w przypadku zastosowania bardzo ograniczonych cech wejściowych.
+Dodatkowo, dominacja scen z szarym niebem (stosunek klatek z szarym niebem do ogółu klatek z widocznym niebem to blisko 90\%) może skłaniać do hipotez nt. zanieczyszczenia powietrza  w analizowanym okresie nagrań. Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić skuteczne narzędzie eksploracyjne dla danych wideo, nawet w przypadku zastosowania bardzo ograniczonych cech wejściowych.
 
 \section{Bibliografia}
 
 \begin{thebibliography}{9}
 
     \bibitem{epec2024}
-    Kowalski, M., Nowak, A., Wiśniewski, P. (2024).
-    \textit{Clustering Analysis of Traffic Scene Images for Automated Weather and Lighting Conditions Recognition}.
-    E3S Web of Conferences, 428, 03010.
-    DOI: 10.1051/e3sconf/202442803010.
+    Yihang Meng (2024).
+    \textit{Effect of Air Pollution on the Colour of the Sky}.
+    E3S Web of Conferences, 553, 03010 (2024).
+    DOI: 10.1051/e3sconf/202455303010.
     Retrieved from: \url{https://www.e3s-conferences.org/articles/e3sconf/pdf/2024/83/e3sconf_epec2024_03010.pdf}
 
 \end{thebibliography}
