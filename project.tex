@@ -126,29 +126,29 @@ W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których 
 \end{figure}
 
 \subsection{Definicja ostatecznych wektorów cech}
-
-Po przeprowadzeniu analizy CV oraz konwersji kolorów do przestrzeni HSV, sformułowano dwie zwarte reprezentacje cech, które posłużyły do eksperymentów klastrowych. Oba wektory mają istotnie mniejszy wymiar niż surowy obraz, co umożliwia szybkie przetwarzanie i redukcję szumu.
-
+Po przeprowadzeniu analizy CV oraz konwersji kolorów do przestrzeni HSV, z grupy pikseli powstałej po nałożeniu maski CV $\leq 20\%$, obliczono podstawowe statystyki opisowe oraz wskaźniki kolorystyczne.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.90\textwidth]{very_nice_histograms.png}
+    \includegraphics[width=1\textwidth]{very_nice_histograms.png}
     \caption{Histogramy dotyczące średnich i median kanałów HSV dla grupy pikseli po uwzględnieniu maski CV.}
     \label{fig:very_nice_histograms}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.90\textwidth]{very_nice_histograms_2.png}
+    \includegraphics[width=1\textwidth]{very_nice_histograms_2.png}
     \caption{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala logarytmiczna).}
     \label{fig:very_nice_histograms_2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.90\textwidth]{very_nice_histograms_3.png}
+    \includegraphics[width=1\textwidth]{very_nice_histograms_3.png}
     \caption{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala liniowa).}
     \label{fig:very_nice_histograms_3}
 \end{figure}
+
+Następnie sformułowano dwie zwarte reprezentacje cech, które posłużyły do eksperymentów klastrowych. Oba wektory mają istotnie mniejszy wymiar niż surowy obraz, co umożliwia szybkie przetwarzanie i redukcję szumu
 
 \textbf{Pierwszy wektor cech \(\vec{f}_1\)} o długości 7 zawiera podstawowe statystyki opisowe oraz wskaźniki kolorystyczne:
 
@@ -239,15 +239,15 @@ Aby oszacować optymalną liczbę klastrów \(k\), obliczono dwa wskaźniki: \te
 Klasyfikacja oparta na \(\vec{f}_2\) pozwoliła na uzyskanie następujących klas:
 
 \begin{itemize}
-    \item \textbf{Klaster 0} – obrazy z wyraźnie błękitnym niebem,
-    \item \textbf{Klaster 1} – sceny z szarym, zachmurzonym niebem lub niskim nasyceniem barwy,
-    \item \textbf{Klaster 2} – obrazy zawierające przeszkody lub zabudowania zamiast nieba,
-    \item \textbf{Klaster 3} – ciemne sceny odpowiadające porze nocnej lub tunelom.
+    \item Obrazy z wyraźnie błękitnym niebem,
+    \item Sceny z szarym, zachmurzonym niebem lub niskim nasyceniem barwy,
+    \item Obrazy zawierające przeszkody lub zabudowania zamiast nieba,
+    \item Ciemne sceny odpowiadające porze nocnej lub tunelom.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{kmeans_3d_clusters.png}
+    \includegraphics[width=1\textwidth]{kmeans_3d_clusters.png}
     \caption{Wyniki KMeans dla wektora \(\vec{f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych.}
     \label{fig:kmeans_f2_clusters}
 \end{figure}
@@ -269,16 +269,16 @@ Eksperyment ten potwierdził, że nawet przy bardzo zwartej reprezentacji, możl
 
 W kolejnym eksperymencie klastrowania zastosowano algorytm DBSCAN na danych zredukowanych do trójwymiarowego wektora \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\). Podejście to miało na celu sprawdzenie, czy nawet przy minimalnej liczbie cech możliwe jest uzyskanie naturalnych skupień bez potrzeby określania liczby klastrów.
 
-\textbf{Wybór parametru \texttt{eps}} oparto o klasyczny wykres odległości do 5 najbliższych sąsiadów. Jak pokazano na Rysunku~\ref{fig:dbscan_eps2}, zauważalne załamanie krzywej następuje w okolicy wartości \( \texttt{eps} \approx 0.014 \), co zostało przyjęte jako punkt wyjściowy do eksperymentów.
+\textbf{Wybór parametru \texttt{eps}} oparto o klasyczny wykres odległości do 5 najbliższych sąsiadów. Jak pokazano na Rysunku~\ref{fig:dbscan_eps2}, zauważalne załamanie krzywej następuje w okolicy wartości \( \texttt{eps} \approx 0.008 \), co zostało przyjęte jako punkt wyjściowy do eksperymentów.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{5nn_plot.png}
+    \includegraphics[width=1\textwidth]{5nn_plot.png}
     \caption{Wykres 5-NN dla danych z wektorem \(\vec{f}_2\) – wybór parametru \texttt{eps}.}
     \label{fig:dbscan_eps2}
 \end{figure}
 
-\textbf{Wyniki klastrowania} z wybranym \texttt{eps = 0.014} i domyślnym \texttt{MinPts = 5} przedstawiono na Rys.~\ref{fig:dbscan_f2_results}. Na wizualizacjach zaznaczono zarówno wszystkie punkty (łącznie z szumem), jak i tylko punkty przypisane do właściwych klastrów.
+\textbf{Wyniki klastrowania} z wybranym \texttt{eps = 0.008} i domyślnym \texttt{MinPts = 900} przedstawiono na Rys.~\ref{fig:dbscan_f2_results}. Na wizualizacjach zaznaczono zarówno wszystkie punkty (łącznie z szumem), jak i tylko punkty przypisane do właściwych klastrów.
 
 \begin{figure}[H]
     \centering
@@ -290,22 +290,22 @@ W kolejnym eksperymencie klastrowania zastosowano algorytm DBSCAN na danych zred
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{dbscan_f2_results_more.png}
-    \caption{Więcej wynikó klastrowania DBSCAN dla \(\vec{f}_2\) –.}
+    \caption{Więcej wyników klastrowania DBSCAN dla \(\vec{f}_2\) dla różnych wartości parametru \texttt{MinPts} w zakresie 500 - 1000.}
     \label{fig:dbscan_f2_results_more}
 \end{figure}
 
 
 Niestety, niezależnie od konfiguracji parametrów, wyniki nie były satysfakcjonujące. Algorytm:
 \begin{itemize}
-    \item traktował ponad 90\% próbek jako \textbf{szum},
+    \item traktował blisko 90\% próbek jako \textbf{szum},
     \item znajdował niewielkie, ciasne klastry w silnie ograniczonym fragmencie przestrzeni cech,
     \item generował \textbf{klastry trudne do zinterpretowania} – jak pokazano na Rys.~\ref{fig:dbscan_samples}, nie były one jednoznacznie powiązane z kolorystyką nieba, przeszkodami ani warunkami oświetleniowymi.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{senseless_clusters.png}
-    \caption{Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej.}
+    \includegraphics[width=1\textwidth]{senseless_clusters.png}
+    \caption{Przykładowe próbki klastrów zidentyfikowanych przez DBSCAN – brak wyraźnej separacji między różnymi typami scen.}
     \label{fig:dbscan_samples}
 \end{figure}
 
@@ -328,7 +328,7 @@ Na podstawie dendrogramu (Rys.~\ref{fig:ward_f2_dendro}) rozważono trzy potencj
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{ward_3clusters.png}
+    \includegraphics[width=1\textwidth]{ward_3clusters.png}
     \caption{Wizualizacja klastrowania Warda na 3 klastry – brak wyraźnego podziału między różnymi typami nieba.}
 \end{figure}
 
@@ -336,7 +336,7 @@ Na podstawie dendrogramu (Rys.~\ref{fig:ward_f2_dendro}) rozważono trzy potencj
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{ward_5clusters.png}
+    \includegraphics[width=1\textwidth]{ward_4clusters.png}
     \caption{Wizualizacja klastrów przy 5 klasach – struktura złożona, ale mniej intuicyjna.}
 \end{figure}
 
@@ -351,7 +351,7 @@ Najlepsze rezultaty uzyskano przy \textbf{podziale na 4 klastry}, gdzie zauważa
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{ward_4clusters.png}
+    \includegraphics[width=1\textwidth]{ward_5clusters.png}
     \caption{Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec{f}_2\).}
     \label{fig:ward_f2_4clusters}
 \end{figure}
@@ -361,7 +361,7 @@ Podział ten potwierdzają również próbki obrazów z każdego klastra (Rys.~\
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{wards_clusters.png}
-    \caption{Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom.}
+    \caption{Przykładowe próbki z każdego klastra zidentyfikowanego przez metodę Warda. Klasy odpowiadają kolejno: przeszkodom, nocy lub tunelowi, niebieskiemu niebu, szaremu niebu.}
     \label{fig:ward_f2_samples}
 \end{figure}
 
@@ -426,7 +426,7 @@ Celem niniejszego projektu była eksploracyjna analiza skupień wybranych klatek
 
     \item Wektor \(\vec{f}_1\), zawierający dodatkowe cechy z przestrzeni RGB (takie jak IQR i proporcje kanałów), nie przyniósł wyraźnej poprawy jakości podziału, ale potwierdził stabilność wyników.
 
-    \item Algorytm \textbf{DBSCAN}, mimo swojej zdolności do detekcji nieliniowych struktur i odrzucania punktów szumowych, nie sprawdził się w analizowanym przypadku. Ponad 90\% próbek było oznaczanych jako szum, a znalezione klastry były małe i trudne do interpretacji.
+    \item Algorytm \textbf{DBSCAN}, mimo swojej zdolności do detekcji nieliniowych struktur i odrzucania punktów szumowych, nie sprawdził się w analizowanym przypadku. Blisko 90\% próbek było oznaczanych jako szum, a znalezione klastry były małe i trudne do interpretacji.
 
     \item Metoda \textbf{Warda} (klastrowanie hierarchiczne) dostarczyła rezultatów porównywalnych z KMeans, szczególnie przy podziale na cztery klastry. Jej dodatkową zaletą była możliwość eksploracji struktury danych na różnych poziomach szczegółowości.
 \end{itemize}
