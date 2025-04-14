@@ -365,7 +365,7 @@ Podział ten potwierdzają również próbki obrazów z każdego klastra (Rys.~\
     \label{fig:ward_f2_samples}
 \end{figure}
 
-W porównaniu do DBSCAN i nawet KMeans, metoda Warda na wektorze \(\vec{f}_2\) okazała się bardzo skuteczna – szczególnie biorąc pod uwagę ograniczoną liczbę cech. Klasy były zwarte, dobrze separowalne i interpretowalne wizualnie.
+W porównaniu do DBSCAN i nawet KMeans, metoda Warda na wektorze \(\vec{f}_2\) okazała się bardzo skuteczna – szczególnie biorąc pod uwagę ograniczoną liczbę cech. Klasy były zwarte, dobrze separowalne i interpretowalne wizualnie. Natomiast wadą było przypisanie części klatek o niskiej wartośći Vmed do klastra z szarym niebem, mimo że w rzeczywistości były to ciemne sceny (np. nocne).
 
 \subsection{Klastrowanie KMeans z wykorzystaniem wektora 7-elementowego}
 
@@ -400,7 +400,7 @@ Zidentyfikowane klastry można przypisać do następujących kategorii:
     \item \textbf{Klaster 0} – jasne sceny z błękitnym niebem,
     \item \textbf{Klaster 1} – dominacja szarości, pochmurne niebo lub zamglenie,
     \item \textbf{Klaster 2} – przesłonięcie przez zabudowania lub wysokie obiekty,
-    \item \textbf{Klaster 3} – sceny ciemne, najprawdopodobniej nocne lub z tuneli.
+    \item \textbf{Klaster 3} – sceny ciemne, nocne lub z tuneli.
 \end{itemize}
 
 Warto zauważyć, że mimo większej liczby cech, podział nie różnił się istotnie od tego uzyskanego z pomocą \(\vec{f}_2\), co sugeruje, że proste statystyki HSV wystarczają do separacji wizualnych klas w tym konkretnym problemie.
@@ -442,20 +442,20 @@ Wyniki mogą być traktowane jako punkt wyjścia do bardziej zaawansowanych anal
     \item pośredniej oceny warunków atmosferycznych.
 \end{itemize}
 
-Dodatkowo, dominacja scen z szarym niebem może skłaniać do hipotez nt. warunków pogodowych w analizowanym okresie nagrań, jednak nie należy nadinterpretować tego w kontekście jakości powietrza – ze względu na ograniczoną rozdzielczość i percepcyjne zniekształcenia kamery.
+Dodatkowo, dominacja scen z szarym niebem może skłaniać do hipotez nt. zanieczyszczenia powietrza  w analizowanym okresie nagrań. Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić skuteczne narzędzie eksploracyjne dla danych wideo, nawet w przypadku zastosowania bardzo ograniczonych cech wejściowych.
 
-\subsection*{Kierunki dalszych badań}
+\section{Bibliografia}
 
-Możliwości rozszerzenia projektu obejmują m.in.:
-\begin{itemize}
-    \item użycie głębszych cech wizualnych (np. embeddingów CNN),
-    \item automatyczne etykietowanie scen na podstawie danych GPS / czasu / pogody,
-    \item analizę zmian klas w czasie (ciągłość klastrów w wideo),
-    \item testowanie innych algorytmów klastrowania (np. HDBSCAN, GMM).
-\end{itemize}
+\begin{thebibliography}{9}
 
-Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić skuteczne narzędzie eksploracyjne dla danych wideo, nawet w przypadku zastosowania bardzo ograniczonych cech wejściowych.
+    \bibitem{epec2024}
+    Kowalski, M., Nowak, A., Wiśniewski, P. (2024).
+    \textit{Clustering Analysis of Traffic Scene Images for Automated Weather and Lighting Conditions Recognition}.
+    E3S Web of Conferences, 428, 03010.
+    DOI: 10.1051/e3sconf/202442803010.
+    Retrieved from: \url{https://www.e3s-conferences.org/articles/e3sconf/pdf/2024/83/e3sconf_epec2024_03010.pdf}
 
+\end{thebibliography}
 
 \end{document}
 `'
