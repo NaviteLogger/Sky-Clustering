@@ -25,13 +25,13 @@
 
 \section{Wstęp}
 \subsection{Cel i zakres analizy}
-W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny stopnia zakorkowania dróg. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych fragmentów obrazu bez potrzeby nadzoru.
+W dobie rosnącego zainteresowania analizą danych obrazowych oraz rozwojem systemów monitoringu i autonomicznej jazdy, analiza nagrań z kamer samochodowych staje się istotnym narzędziem badawczym. Kamery montowane na pojazdach rejestrują wiele godzin materiałów wideo, które można wykorzystać do detekcji przeszkód, analizy warunków pogodowych czy oceny stopnia zakorkowania dróg. Jednym z podejść do eksploracyjnej analizy takich danych jest analiza skupień (ang. \textit{clustering}), umożliwiająca grupowanie podobnych obrazów bez potrzeby nadzoru.
 
-Celem projektu jest przeprowadzenie eksploracyjnej analizy skupień na wybranym zbiorze klatek wyodrębnionych z nagrań wideo wykonanych w trakcie jazdy samochodem po Warszawie i jej obrzeżach. Skupiamy się na analizie kolorów występujących w górnej części obrazu, które często odpowiadają niebu lub wysokim zabudowaniom miejskim.
+Celem projektu jest przeprowadzenie eksploracyjnej analizy skupień na wybranym zbiorze klatek wyodrębnionych z nagrań wideo wykonanych w trakcie jazdy samochodem po Warszawie i jej obrzeżach. Skupiamy się na analizie o analizie pikseli występujących w górnej części obrazu, które często odpowiadają niebu, drzewom lub wysokim zabudowaniom miejskim.
 
 Do analizy zastosowano kilka popularnych metod klastrowania, w tym KMeans, DBSCAN oraz metodę Warda. Wcześniej konieczne było przekształcenie danych z obrazów do postaci wektorów cech, ich selekcja oraz redukcja wymiarowości. Szczególną uwagę poświęcono modelowi barw HSV, który lepiej oddaje percepcyjne różnice kolorów niż klasyczny model RGB.
 
-Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba widocznego na nagraniach możliwe jest wykrycie istotnych klas obrazów i czy dominacja poszczególnych kolorów (np. szarości czy czerni) może być interpretowana w kontekście gdzie znajdował się samochód wyposażony w kamerę.
+Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba widocznego na nagraniach możliwe jest wykrycie istotnych klas obrazów i czy dominacja poszczególnych kolorów (np. szarości czy czerni) może być interpretowana w jakiś konkretny sposób.
 
 \subsection{Słownik pojęć}
 
@@ -45,55 +45,52 @@ Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba wid
     \item \textbf{DBSCAN (Density-Based Spatial Clustering of Applications with Noise)} – algorytm klastrowania wykrywający gęsto zaludnione obszary w danych; nie wymaga podania liczby klastrów i radzi sobie z hałasem.
 
     \item \textbf{Metoda Warda} – hierarchiczna metoda klastrowania minimalizująca sumę kwadratów różnic wewnątrz klastrów. Pozwala na tworzenie dendrogramów i analizę hierarchicznej struktury danych.
-
-    \item \textbf{Kolor nieba} – istotna cecha wizualna wykorzystywana w analizie warunków atmosferycznych. Niebieskie niebo może wskazywać na dzień, a szare na wieczór.
 \end{itemize}
 
 \section{Zbiór danych}
 \subsection{Ogólny opis zbioru}
 
-Zbiór danych wykorzystany w niniejszej analizie pochodzi z nagrań wideo zarejestrowanych za pomocą kamery samochodowej podczas przejazdu przez różne części Warszawy. Łącznie analizowany materiał obejmuje około 140 godzin jazdy, zarejestrowanych w zróżnicowanych warunkach oświetleniowych i pogodowych (np. dni pochmurne, słoneczne, zmierzch, przejazdy przez tunele lub pod estakadami).
+Zbiór danych wykorzystany w niniejszej analizie pochodzi z nagrań wideo zarejestrowanych za pomocą kamery samochodowej podczas przejazdu przez różne części Warszawy. Łącznie analizowany materiał obejmuje około 6 godzin jazdy, zarejestrowanych w zróżnicowanych warunkach oświetleniowych i pogodowych (np. dni pochmurne, słoneczne, zmierzch, przejazdy przez tunele lub pod mostami).
 
-Na potrzeby dalszej analizy z nagrań zostały wyodrębnione pojedyncze klatki (60 klatek z sekundy nagrania). Celem było uchwycenie różnorodności scen miejskich widocznych na górnej części obrazu, gdzie – zależnie od otoczenia – może występować niebo, zabudowania, infrastruktura drogowa lub bloki mieszkaniowe.
+Na potrzeby dalszej analizy z nagrań zostały wyodrębnione pojedyncze klatki (60 klatek z sekundy nagrania). Celem było uchwycenie różnorodności scen miejskich widocznych na górnej części obrazu, gdzie – zależnie od otoczenia – może występować niebo, zabudowania, infrastruktura drogowa, drzewa lub bloki mieszkaniowe.
 
 Trasa przejazdu obejmowała m.in. centrum Warszawy, mosty, dzielnice z gęstą zabudową oraz fragmenty tras szybkiego ruchu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{mapa_trasy.png}
-    \caption{Orientacyjna trasa przejazdu samochodu z kamerą.}
+    \includegraphics[width=0.9\textwidth]{mapa_trasy.png}
+    \caption{Trasy przejazdu samochodu z kamerą.}
     \label{fig:mapa}
 \end{figure}
 
-W początkowej fazie analizy pozyskano łącznie około 6.2 miliona klatek , które następnie poddano przetwarzaniu w celu dalszego modelowania i klastrowania kolorystycznego. Zastosowana metodologia koncentruje się nie na całym obrazie, lecz na jego górnej części, w której najczęściej znajduje się niebo lub elementy go przysłaniające – takie jak budynki, znaki drogowe lub elementy infrastruktury. To właśnie ta część obrazu została uznana za najbardziej reprezentatywną do klastrowania na podstawie kolorystyki sceny.
+W początkowej fazie analizy pozyskano łącznie 44 412 klatek, które następnie poddano przetwarzaniu w celu dalszego modelowania i klastrowania kolorystycznego. Zastosowana metodologia koncentruje się nie na całym obrazie, lecz na jego górnej części, w której najczęściej znajduje się niebo lub elementy go przysłaniające – takie jak budynki, znaki drogowe lub elementy infrastruktury. To właśnie ta część obrazu została uznana za najbardziej reprezentatywną do klastrowania na podstawie kolorystyki sceny.
 
 \subsection{Ekstrakcja klatek}
 
 Z nagrań wideo pozyskanych z kamery samochodowej wyodrębniono pojedyncze klatki, po 60 na sekundę nagrania. Proces ekstrakcji został przeprowadzony przy użyciu skryptu automatyzującego odczyt kolejnych ramek z plików wideo oraz zapis ich jako obrazów w formacie \texttt{.png}.
 
-Każda z klatek została przeskalowana (licząc średnią z każdych usuniętych klatek w jedną) z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
+Każda z klatek została przeskalowana (licząc średnią z grup pixeli) z oryginalnej rozdzielczości $1920 \times 1080$ pikseli do mniejszej, uproszczonej postaci $240 \times 80$ piksele, co umożliwiało znaczną redukcję kosztów obliczeniowych przy dalszym przetwarzaniu. Redukcja rozdzielczości była kluczowa z uwagi na fakt, że dalsze etapy analizy wymagały konwersji każdej klatki do wektora cech.
 
 Dla każdej przeskalowanej klatki obliczono wektor cech, w którym każdy piksel był reprezentowany trzema wartościami odpowiadającymi składowym koloru w przestrzeni RGB. Ostatecznie więc pojedynczy obraz o rozmiarze $240 \times 80$ zawierał $240 \times 80 = 19.200$ pikseli, a wektor cech miał długość $19.200 \times 3 = 57\ 600$ elementów.
 
-Tak otrzymane wektory stanowiły bazę do dalszej redukcji wymiarowości oraz transformacji kolorystycznych, umożliwiających ekstrakcję tylko tych fragmentów obrazu, które były istotne z punktu widzenia analizy kolorystyki nieba lub jego braku.
+Tak otrzymane wektory stanowiły bazę do dalszej redukcji wymiarowości oraz transformacji kolorystycznych, umożliwiających ekstrakcję tylko tych fragmentów obrazu, które były istotne z punktu widzenia analizy górnych partii klatek.
 
-
-\subsubsection{Analiza średniej klatki}
+\subsection{Analiza średniej klatki}
 
 Pierwszym krokiem redukcji danych było obliczenie tzw. średniej klatki, czyli uśrednienia wartości pikseli dla wszystkich wyodrębnionych obrazów. Celem tego zabiegu była identyfikacja wspólnych, statycznych elementów występujących w większości klatek, które nie niosą dodatkowej informacji istotnej dla klastrowania.
 
-W wyniku analizy zaobserwowano wyraźną obecność odbić deski rozdzielczej oraz maski samochodu w dolnej części obrazów. Te elementy występowały regularnie i stanowiły silnie powtarzalny wzorzec, który mógłby zdominować dalszą analizę skupień. Na podstawie obserwacji średniej klatki zdecydowano się na obcięcie dolnych 20 wierszy obrazu, co odpowiadało około jednej trzeciej jego wysokości.
+W wyniku analizy zaobserwowano wyraźną obecność odbić deski rozdzielczej oraz maski samochodu w dolnej części obrazów. Te elementy występowały regularnie i stanowiły silnie powtarzalny wzorzec, który mógłby zdominować dalszą analizę skupień. Na podstawie obserwacji średniej klatki zdecydowano się na obcięcie dolnych 20 wierszy obrazu, co odpowiadało dokładnie jednej czwartej.
 
 Tym samym analizowany fragment każdej klatki został ograniczony do wymiaru $240 \times 60$ piksele, co odpowiadało nowemu wektorowi cech o długości $240 \cdot 60 \cdot 3 = 43\ 200$ elementów w przestrzeni RGB.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{średnia_klatka.png}
+    \includegraphics[width=0.9\textwidth]{średnia_klatka.png}
     \caption{Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza).}
     \label{fig:srednia_klatka}
 \end{figure}
 
-\subsubsection{Analiza współczynnika zmienności (CV)}
+\subsection{Analiza współczynnika zmienności (CV)}
 
 Kolejnym etapem redukcji liczby cech była analiza współczynnika zmienności (\textit{Coefficient of Variation}, CV) dla każdego piksela w analizowanej przestrzeni obrazu. Współczynnik CV został obliczony osobno dla każdej składowej koloru RGB na podstawie wszystkich wyodrębnionych klatek, według wzoru:
 
@@ -105,33 +102,53 @@ gdzie $\sigma$ to odchylenie standardowe danego piksela w czasie, a $\mu$ to jeg
 
 Na podstawie wyników analizy CV zauważono, że obszary o niskiej zmienności (CV $\leq 20\%$) występowały głównie w górnej części obrazu i pokrywały się z miejscami, w których zazwyczaj znajduje się niebo. Piksele te charakteryzują się dużą stabilnością w czasie – niezależnie od warunków atmosferycznych lub pozycji pojazdu.
 
-W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których CV dla przynajmniej jednej składowej RGB nie przekraczało 20\%. Taka selekcja pozwoliła ograniczyć liczbę cech do około $\sim 930$ (wartość zależna od liczby wybranych pikseli). Dzięki temu uzyskano tzw. \textbf{krótszy wektor cech}, który okazał się szczególnie przydatny w dalszych eksperymentach z klastrowaniem.
+W związku z tym zdefiniowano maskę, która wybiera tylko te piksele, których CV średnie trzech składowych nie przekraczało 20\%. Taka selekcja pozwoliła ograniczyć liczbę pikseli do dokładnie $\sim 930$ (wektor do rozmiaru $\sim 2790$). Dzięki temu uzyskano krótszy wektor cech, który okazał się szczególnie przydatny w dalszych eksperymentach z klastrowaniem.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{cv_min_max.png}
-    \caption{Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$).}
+    \includegraphics[width=0.90\textwidth]{cv_min_max.png}
+    \caption{Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$). CVmax - najwyższa wartość CV z kanałów, CVmean - średnia wartość CV z kanałów.}
     \label{fig:cv_min_max}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{cv_cum.png}
-    \caption{Kummulatywny wykres CV}
+    \includegraphics[width=0.90\textwidth]{cv_cum.png}
+    \caption{Kumulatywny wykres CV}
     \label{fig:cv_cum}
 \end{figure}
 
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{maska_cv.png}
+    \includegraphics[width=0.90\textwidth]{maska_cv.png}
     \caption{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}
     \label{fig:maska_cv}
 \end{figure}
 
-\subsubsection{Definicja ostatecznych wektorów cech}
+\subsection{Definicja ostatecznych wektorów cech}
 
 Po przeprowadzeniu analizy CV oraz konwersji kolorów do przestrzeni HSV, sformułowano dwie zwarte reprezentacje cech, które posłużyły do eksperymentów klastrowych. Oba wektory mają istotnie mniejszy wymiar niż surowy obraz, co umożliwia szybkie przetwarzanie i redukcję szumu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{very_nice_histograms.png}
+    \caption{Histogramy dotyczące średnich i median kanałów HSV dla grupy pikseli po uwzględnieniu maski CV.}
+    \label{fig:very_nice_histograms}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{very_nice_histograms_2.png}
+    \caption{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala logarytmiczna).}
+    \label{fig:very_nice_histograms_2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{very_nice_histograms_3.png}
+    \caption{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala liniowa).}
+    \label{fig:very_nice_histograms_3}
+\end{figure}
 
 \textbf{Pierwszy wektor cech \(\vec{f}_1\)} o długości 7 zawiera podstawowe statystyki opisowe oraz wskaźniki kolorystyczne:
 
@@ -177,7 +194,7 @@ Gdzie:
 
 Oba wektory zostały następnie wykorzystane jako reprezentacja cech w eksperymentach z algorytmem KMeans. Wektor \(\vec{f}_2\), mimo że krótszy, zapewniał zaskakująco dobrą separowalność w niektórych przypadkach, jednak to \(\vec{f}_1\) dawał bardziej stabilne i interpretowalne klastry.
 
-\subsubsection{Wizualizacja przestrzeni cech}
+\subsection{Wizualizacja przestrzeni cech}
 
 Aby lepiej zrozumieć rozkład danych w przestrzeni trójwymiarowej \(\vec{f}_2 = [\widetilde{H}, \widetilde{S}, \widetilde{V}]\), przygotowano serię wykresów przedstawiających strukturę danych z różnych perspektyw.
 
@@ -441,3 +458,4 @@ Uzyskane rezultaty pokazują, że prosta analiza kolorystyczna może stanowić s
 
 
 \end{document}
+`'

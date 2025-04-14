@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1744651662.61445 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744651679.99988 0
+["pdflatex"] 1744658974.64529 "/workspaces/Sky-Clustering/project.tex" "project.pdf" "project" 1744658981.36595 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -108,7 +108,7 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1743313660 5501089 f2ffe622267f7d8bfaba0244ab87ba6f ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1743313810 3345755 ba2ca5aadbc395a8eb3e969a7d392ec2 ""
   "/usr/local/texlive/2025/texmf.cnf" 1743313649 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "/workspaces/Sky-Clustering/project.tex" 1744651667.03429 28995 1e105e6265747ce66b529df7185d9d16 ""
+  "/workspaces/Sky-Clustering/project.tex" 1744658978.0959 29601 d34d804e527ba91a356395e67c836d4d ""
   "5nn_plot.png" 1744546911.71429 53023 67fc0c4820d743ec4d7d47bf2ff80b26 ""
   "cv_cum.png" 1744651263.80745 132758 c4e62ce552b078a9f88874a08f62e0b8 ""
   "cv_min_max.png" 1744651232.88564 110324 3fb17a6b25b1d04081b62964d027800a ""
@@ -121,11 +121,14 @@
   "kmeans_sample_grid.png" 1744546521.1506 471452 9bf1e579b0f4cf643c9c6c239b6ce0dd ""
   "mapa_trasy.png" 1744547580.20701 3591613 427e9015e7160f387c8b1cbace43a509 ""
   "maska_cv.png" 1744545992.68585 2409173 4f6e4aea369831b3fa9a4c8891492c89 ""
-  "project.aux" 1744651679.74925 9557 de14b8a68b96ce94e511174b05a42ed3 "pdflatex"
-  "project.out" 1744651679.75898 3344 4dd9a62fa816110091c439d767ea95c4 "pdflatex"
-  "project.tex" 1744651667.03429 28995 1e105e6265747ce66b529df7185d9d16 ""
+  "project.aux" 1744658992.08413 10906 f9f97e62728bc295394ce40d3eb1a686 "pdflatex"
+  "project.out" 1744658992.09113 3305 d2e42a3b167ced73be74734f828388df "pdflatex"
+  "project.tex" 1744658978.0959 29601 d34d804e527ba91a356395e67c836d4d ""
   "senseless_clusters.png" 1744651536.2405 520881 2f6b9f67218c40284b50ee276f30e16c ""
   "vector_1.png" 1744651633.35363 440556 e959c050300b3ad7e152782372b5488e ""
+  "very_nice_histograms.png" 1744658838.61881 145824 c3a292eb38d8a35a9fbe3a03826e3fcd ""
+  "very_nice_histograms_2.png" 1744658863.3399 269820 8f637c1c4d6f07730735d094b70ec6ac ""
+  "very_nice_histograms_3.png" 1744658806.13314 242456 4492e883072d8a7cec70bc5a064424d3 ""
   "ward_3clusters.png" 1744547259.52276 227634 31e460c76f9ac05053bcf26be3deb2a8 ""
   "ward_4clusters.png" 1744547282.50697 228281 9c9fb7e760f1a8bd7050ae928a34aa4a ""
   "ward_5clusters.png" 1744547299.54458 748764 77e439caddc6cc4edb2a0582f908f6d2 ""

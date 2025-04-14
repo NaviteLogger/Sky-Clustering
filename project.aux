@@ -11,51 +11,57 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Słownik pojęć}{2}{subsection.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Zbiór danych}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Ogólny opis zbioru}{2}{subsection.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Orientacyjna trasa przejazdu samochodu z kamerą.}}{3}{figure.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Trasy przejazdu samochodu z kamerą.}}{3}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:mapa}{{1}{3}{Orientacyjna trasa przejazdu samochodu z kamerą}{figure.caption.1}{}}
+\newlabel{fig:mapa}{{1}{3}{Trasy przejazdu samochodu z kamerą}{figure.caption.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Ekstrakcja klatek}{3}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Analiza średniej klatki}{4}{subsubsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Analiza średniej klatki}{4}{subsection.2.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza).}}{4}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:srednia_klatka}{{2}{4}{Obraz średniej klatki – widoczne powtarzalne elementy w dolnej części (maska, deska rozdzielcza)}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Analiza współczynnika zmienności (CV)}{4}{subsubsection.2.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$).}}{5}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:cv_min_max}{{3}{5}{Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$)}{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Kummulatywny wykres CV}}{5}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:cv_cum}{{4}{5}{Kummulatywny wykres CV}{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}}{5}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:maska_cv}{{5}{5}{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu}{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Definicja ostatecznych wektorów cech}{5}{subsubsection.2.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Wizualizacja przestrzeni cech}{6}{subsubsection.2.2.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Rozkład danych w przestrzeni trójwymiarowej \(\vec  {f}_2 = [\widetilde  {H}, \widetilde  {S}, \widetilde  {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde  {V}\).}}{8}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:scatter_f2}{{6}{8}{Rozkład danych w przestrzeni trójwymiarowej \(\vec {f}_2 = [\widetilde {H}, \widetilde {S}, \widetilde {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde {V}\)}{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Klastrowanie KMeans z wykorzystaniem wektora cech}{8}{subsection.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec  {f}_2\).}}{9}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:elbow_f2}{{7}{9}{Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec {f}_2\)}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych.}}{10}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:kmeans_f2_clusters}{{8}{10}{Wyniki KMeans dla wektora \(\vec {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych}{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Wybrane obrazy z czterech klastrów (KMeans, \(\vec  {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi.}}{11}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:kmeans_f2_samples}{{9}{11}{Wybrane obrazy z czterech klastrów (KMeans, \(\vec {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi}{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Klastrowanie DBSCAN z wykorzystaniem wektora 3-elementowego}{11}{subsection.2.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Wykres 5-NN dla danych z wektorem \(\vec  {f}_2\) – wybór parametru \texttt  {eps}.}}{11}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:dbscan_eps2}{{10}{11}{Wykres 5-NN dla danych z wektorem \(\vec {f}_2\) – wybór parametru \texttt {eps}}{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Wyniki klastrowania DBSCAN dla \(\vec  {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu).}}{12}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:dbscan_f2_results}{{11}{12}{Wyniki klastrowania DBSCAN dla \(\vec {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu)}{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Więcej wynikó klastrowania DBSCAN dla \(\vec  {f}_2\) –.}}{13}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:dbscan_f2_results_more}{{12}{13}{Więcej wynikó klastrowania DBSCAN dla \(\vec {f}_2\) –}{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej.}}{14}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:dbscan_samples}{{13}{14}{Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej}{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Klastrowanie metodą Warda z wykorzystaniem wektora 3-elementowego}{14}{subsection.2.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec  {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów.}}{15}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:ward_f2_dendro}{{14}{15}{Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów}{figure.caption.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Wizualizacja klastrowania Warda na 3 klastry – brak wyraźnego podziału między różnymi typami nieba.}}{15}{figure.caption.15}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Wizualizacja klastrów przy 5 klasach – struktura złożona, ale mniej intuicyjna.}}{16}{figure.caption.16}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec  {f}_2\).}}{17}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:ward_f2_4clusters}{{17}{17}{Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec {f}_2\)}{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom.}}{18}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:ward_f2_samples}{{18}{18}{Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom}{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Klastrowanie KMeans z wykorzystaniem wektora 7-elementowego}{18}{subsection.2.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów.}}{19}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:kmeans_f1_samples}{{19}{19}{Wyniki KMeans dla wektora \(\vec {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów}{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Podsumowanie i wnioski}{19}{section.3}\protected@file@percent }
-\gdef \@abspage@last{21}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Analiza współczynnika zmienności (CV)}{4}{subsection.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$). CVmax - najwyższa wartość CV z kanałów, CVmean - średnia wartość CV z kanałów.}}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:cv_min_max}{{3}{5}{Współczynnik zmienności (CV) dla składowych RGB – widoczne obszary o niskiej zmienności (CV $\leq 20\%$). CVmax - najwyższa wartość CV z kanałów, CVmean - średnia wartość CV z kanałów}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Kumulatywny wykres CV}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:cv_cum}{{4}{6}{Kumulatywny wykres CV}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu.}}{6}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:maska_cv}{{5}{6}{Maska pikseli z CV $\leq 20\%$, odpowiadających zazwyczaj niebu}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Definicja ostatecznych wektorów cech}{6}{subsection.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Histogramy dotyczące średnich i median kanałów HSV dla grupy pikseli po uwzględnieniu maski CV.}}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:very_nice_histograms}{{6}{7}{Histogramy dotyczące średnich i median kanałów HSV dla grupy pikseli po uwzględnieniu maski CV}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala logarytmiczna).}}{7}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:very_nice_histograms_2}{{7}{7}{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala logarytmiczna)}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala liniowa).}}{8}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:very_nice_histograms_3}{{8}{8}{Histogramy dotyczące statystyk opisowych grupy pikseli powstających po uwzględnieniu maski CV (skala liniowa)}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Wizualizacja przestrzeni cech}{9}{subsection.2.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Rozkład danych w przestrzeni trójwymiarowej \(\vec  {f}_2 = [\widetilde  {H}, \widetilde  {S}, \widetilde  {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde  {V}\).}}{10}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:scatter_f2}{{9}{10}{Rozkład danych w przestrzeni trójwymiarowej \(\vec {f}_2 = [\widetilde {H}, \widetilde {S}, \widetilde {V}]\) – widoki 3D (góra) i rzuty 2D (dół). Kolor punktów odpowiada wartości \(\widetilde {V}\)}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Klastrowanie KMeans z wykorzystaniem wektora cech}{10}{subsection.2.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec  {f}_2\).}}{11}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:elbow_f2}{{10}{11}{Analiza optymalnej liczby klastrów na podstawie inercji i wskaźnika silhouette dla wektora \(\vec {f}_2\)}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych.}}{12}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:kmeans_f2_clusters}{{11}{12}{Wyniki KMeans dla wektora \(\vec {f}_2\): wizualizacja 3D klastrów i ich etykiet interpretacyjnych}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Wybrane obrazy z czterech klastrów (KMeans, \(\vec  {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi.}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:kmeans_f2_samples}{{12}{13}{Wybrane obrazy z czterech klastrów (KMeans, \(\vec {f}_2\)). Klasy odpowiadają kolejno: niebieskiemu niebu, szaremu niebu, przeszkodom oraz nocy/tunelowi}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8}Klastrowanie DBSCAN z wykorzystaniem wektora 3-elementowego}{13}{subsection.2.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Wykres 5-NN dla danych z wektorem \(\vec  {f}_2\) – wybór parametru \texttt  {eps}.}}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:dbscan_eps2}{{13}{13}{Wykres 5-NN dla danych z wektorem \(\vec {f}_2\) – wybór parametru \texttt {eps}}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Wyniki klastrowania DBSCAN dla \(\vec  {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu).}}{14}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:dbscan_f2_results}{{14}{14}{Wyniki klastrowania DBSCAN dla \(\vec {f}_2\) – u góry: zidentyfikowane 3 klastry, u dołu: 2 klastry. Po lewej – wszystkie punkty, po prawej – tylko klastry (bez szumu)}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Więcej wynikó klastrowania DBSCAN dla \(\vec  {f}_2\) –.}}{15}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:dbscan_f2_results_more}{{15}{15}{Więcej wynikó klastrowania DBSCAN dla \(\vec {f}_2\) –}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej.}}{16}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:dbscan_samples}{{16}{16}{Przykładowe obrazy przypisane do klastrów DBSCAN – brak spójności semantycznej}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9}Klastrowanie metodą Warda z wykorzystaniem wektora 3-elementowego}{16}{subsection.2.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec  {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów.}}{17}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:ward_f2_dendro}{{17}{17}{Dendrogram wygenerowany metodą Warda dla danych z wektorem \(\vec {f}_2\). Widoczne potencjalne cięcia na 3–5 klastrów}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Wizualizacja klastrowania Warda na 3 klastry – brak wyraźnego podziału między różnymi typami nieba.}}{17}{figure.caption.18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Wizualizacja klastrów przy 5 klasach – struktura złożona, ale mniej intuicyjna.}}{18}{figure.caption.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec  {f}_2\).}}{19}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:ward_f2_4clusters}{{20}{19}{Wizualizacja 4 klastrów metodą Warda – dobre rozdzielenie typów scen przy użyciu \(\vec {f}_2\)}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom.}}{20}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:ward_f2_samples}{{21}{20}{Przykładowe obrazy przypisane do poszczególnych klastrów – klasy odpowiadają błękitowi, szarościom, nocy i przeszkodom}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.10}Klastrowanie KMeans z wykorzystaniem wektora 7-elementowego}{20}{subsection.2.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Wyniki KMeans dla wektora \(\vec  {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów.}}{21}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:kmeans_f1_samples}{{22}{21}{Wyniki KMeans dla wektora \(\vec {f}_1\) – interpretacja klastrów bardzo zbliżona do poprzednich wariantów}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Podsumowanie i wnioski}{21}{section.3}\protected@file@percent }
+\gdef \@abspage@last{23}
