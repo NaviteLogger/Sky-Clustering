@@ -183,6 +183,16 @@ INPUT ./średnia_klatka.png
 INPUT ./średnia_klatka.png
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm
+INPUT ./cv_min_max.png
+INPUT ./cv_min_max.png
+INPUT ./cv_min_max.png
+INPUT ./cv_min_max.png
+INPUT ./cv_min_max.png
+INPUT ./cv_cum.png
+INPUT ./cv_cum.png
+INPUT ./cv_cum.png
+INPUT ./cv_cum.png
+INPUT ./cv_cum.png
 INPUT ./maska_cv.png
 INPUT ./maska_cv.png
 INPUT ./maska_cv.png
