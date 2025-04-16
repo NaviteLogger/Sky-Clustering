@@ -36,16 +36,20 @@ Analiza pozwala odpowiedzieć na pytanie, czy na podstawie kolorystyki nieba wid
 \subsection{Słownik pojęć}
 
 \begin{itemize}
-    \item \textbf{RGB (Red, Green, Blue)} – przestrzeń barw oparta na składowych światła czerwonego, zielonego i niebieskiego. Popularna w reprezentacji obrazów w kamerach i monitorach.
+    \item[RGB] Model kolorów oparty na trzech składowych: \textbf{R}ed (czerwony), \textbf{G}reen (zielony) i \textbf{B}lue (niebieski). Kolory powstają przez mieszanie tych składowych w różnych proporcjach.
 
-    \item \textbf{HSV (Hue, Saturation, Value)} – alternatywna przestrzeń barw lepiej odpowiadająca postrzeganiu kolorów przez człowieka. Składowe opisują barwę (Hue), nasycenie (Saturation) i jasność (Value).
+    \item[HSV] Model kolorów oparty na trzech składowych: \textbf{H}ue (odcień), \textbf{S}aturation (nasycenie), \textbf{V}alue (jasność). Lepszy do analizy barw niż RGB, bo oddziela jasność od koloru.
 
-    \item \textbf{KMeans} – popularna metoda klastrowania polegająca na podziale danych na $k$ klastrów w taki sposób, aby minimalizować odległość punktów od środków klastrów.
+    \item[KMeans] Algorytm klasteryzacji, który dzieli dane na \(k\) grup, minimalizując sumę kwadratów odległości punktów od środka klastra. Wymaga podania liczby klastrów z góry.
 
-    \item \textbf{DBSCAN (Density-Based Spatial Clustering of Applications with Noise)} – algorytm klastrowania wykrywający gęsto zaludnione obszary w danych; nie wymaga podania liczby klastrów i radzi sobie z hałasem.
+    \item[DBSCAN] Algorytm klasteryzacji oparty na gęstości punktów. Wykrywa klastry dowolnych kształtów i potrafi ignorować punkty odstające.\\
+          \textbf{Parametry:}
+          \begin{itemize}
+              \item \texttt{eps} – maksymalna odległość między punktami, by były sąsiadami,
+              \item \texttt{min\_samples} – minimalna liczba punktów w sąsiedztwie, aby punkt był rdzeniowy.
+          \end{itemize}
 
-    \item \textbf{Metoda Warda} – hierarchiczna metoda klastrowania minimalizująca sumę kwadratów różnic wewnątrz klastrów. Pozwala na tworzenie dendrogramów i analizę hierarchicznej struktury danych.
-\end{itemize}
+    \item[Ward] Metoda hierarchicznej klasteryzacji, która łączy klastry w taki sposób, by minimalizować wzrost całkowitej wariancji wewnątrz klastrów.\end{itemize}
 
 \section{Zbiór danych}
 \subsection{Ogólny opis zbioru}
